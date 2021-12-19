@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169455113444",
+    "project_id": "calories-lookout",
+    "storage_bucket": "calories-lookout.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169455113444:android:1970fafb7725701edf88f1",
+        "android_client_info": {
+          "package_name": "com.calories.calorieslookout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169455113444-sm6msnbjo7q7ogkdkaqkejlg2pdbmfhi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTS6Th0Fim19gUoo3lEh-dHw1UIKTTu1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169455113444-sm6msnbjo7q7ogkdkaqkejlg2pdbmfhi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
