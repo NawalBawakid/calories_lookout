@@ -1,31 +1,35 @@
 package com.calories.calorieslookout
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
+import com.calories.calorieslookout.databinding.FragmentLoginBinding
+import com.calories.calorieslookout.viewModel.OverviewViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BreakfastDescriptionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BreakfastDescriptionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+//    companion object{
+//        const val SEARCH_PREFIX = "https://www.google.com/search?q="
+//    }
+
+    private var binding: FragmentBreakfastDescriptionBinding? = null
+
+    private val viewModel: OverviewViewModel by activityViewModels()
+
+
+    var index = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        arguments.let {
+            index = it!!.getInt("id")
         }
     }
 
@@ -33,27 +37,32 @@ class BreakfastDescriptionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_breakfast_description, container, false)
+        binding = FragmentBreakfastDescriptionBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BreakfastDescriptionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BreakfastDescriptionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var item = viewModel.infoItem.value?.get(index)?.recipe?.url
+
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            mealViewModel = viewModel
+            detailsBreakfastFragment = this@BreakfastDescriptionFragment
+            viewModel.informationll(index)
+//            viewModel.roundNumber(viewModel.calories.toString().toInt())
+            recipe.setOnClickListener {
+                val queryUrl: Uri = Uri.parse("${item}")
+                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+                context?.startActivity(intent)
             }
+        }
+
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
 }
