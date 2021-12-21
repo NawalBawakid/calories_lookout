@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.calories.calorieslookout.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="Sign in">
+        <action
+            android:id="@+id/action_loginFragment_to_breakfastFragment"
+            app:destination="@id/breakfastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/breakfastFragment"
+        android:name="com.calories.calorieslookout.BreakfastFragment"
+        android:label="Meals">
+        <action
+            android:id="@+id/action_breakfastFragment_to_breakfastDescriptionFragment"
+            app:destination="@id/breakfastDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/breakfastDescriptionFragment"
+        android:name="com.calories.calorieslookout.BreakfastDescriptionFragment"
+        android:label="Recipe"
+        tools:layout="@layout/fragment_breakfast_description">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

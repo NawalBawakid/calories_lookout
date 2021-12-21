@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="details_item"
+            type="com.calories.calorieslookout.network.HitsItem" />
+
+        <variable
+            name="mealViewModel"
+            type="com.calories.calorieslookout.viewModel.OverviewViewModel" />
+
+        <variable
+            name="detailsBreakfastFragment"
+            type="com.calories.calorieslookout.BreakfastDescriptionFragment" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DBF1DC">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/MovieItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/poster_image"
+                android:layout_width="412dp"
+                android:layout_height="396dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:imageUrl="@{mealViewModel.photos}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/title_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="20dp"
+                android:paddingEnd="10sp"
+                android:gravity="left"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#0F2467"
+                app:layout_constraintEnd_toEndOf="@id/poster_image"
+                app:layout_constraintStart_toStartOf="@id/poster_image"
+                app:layout_constraintTop_toBottomOf="@id/poster_image"
+                app:textset="@{mealViewModel.title}"
+                tools:text="Title" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_where_to_vote_24"
+                android:paddingTop="9sp"
+                android:paddingStart="20sp"
+                app:layout_constraintStart_toStartOf="@id/poster_image"
+                app:layout_constraintTop_toBottomOf="@id/title_id"
+                app:layout_constraintEnd_toStartOf="@id/calories"/>
+
+
+            <TextView
+                android:id="@+id/calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:paddingTop="9sp"
+                android:paddingBottom="30dp"
+                android:textSize="20sp"
+                android:textColor="#0A1A50"
+                app:layout_constraintStart_toEndOf="@id/imageView"
+                app:layout_constraintTop_toBottomOf="@id/title_id"
+                app:textset="@{mealViewModel.calories}"
+                tools:text="1250" />
+
+
+            <Button
+                android:id="@+id/recipe"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:paddingBottom="10sp"
+                android:textSize="20sp"
+                android:text="Recipe"
+                android:background="@drawable/round_corner_top"
+                app:layout_constraintEnd_toEndOf="@id/poster_image"
+                app:layout_constraintStart_toStartOf="@id/poster_image"
+                app:layout_constraintTop_toBottomOf="@id/calories"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

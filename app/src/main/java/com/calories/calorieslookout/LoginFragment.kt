@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.calories.calorieslookout.databinding.FragmentLoginBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -49,6 +51,13 @@ class LoginFragment : Fragment() {
 //            if(signInLauncher == ){
 //
 //            }
+        }
+
+        binding.move.setOnClickListener{
+            var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment()
+//            holder.itemOfMovie.findNavController().navigate(action)
+            binding.move.findNavController().navigate(action)
+
         }
     }
     override fun onCreateView(
