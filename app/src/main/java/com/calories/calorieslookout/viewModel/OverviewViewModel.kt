@@ -35,6 +35,7 @@ class OverviewViewModel : ViewModel(){
         getMealsPhotos("breakfast")
     }
 
+
      fun getMealsPhotos(type: String) {
         viewModelScope.launch {
             _status.value = CaloriesApiStatus.LOADING
@@ -59,12 +60,9 @@ class OverviewViewModel : ViewModel(){
         _photos.value = item?.recipe?.image
         _title.value = item?.recipe?.label
         _descriptions.value = item?.recipe?.url
-        _calories.value = item?.recipe?.calories.toString()
+        _calories.value = item?.recipe?.getCalories()
     }
 
-    fun roundNumber(calories: Int):Int{
-        var number = "%1f".format(calories)
-        return number.toInt()
-    }
+
 
 }

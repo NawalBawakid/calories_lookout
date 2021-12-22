@@ -10,7 +10,11 @@ import retrofit2.http.Query
 
 
 
-private const val BASE_URL = "https://api.edamam.com"
+private const val BASE_URL = "https://api.edamam.com/"
+private const val DEFAULT = "search?q="
+
+//https://api.edamam.com/api/recipes/v2?type=public&q=breakfast&app_id=fafcd302&app_key=76b9f87704af9178637d1b74796f09c6
+
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -26,8 +30,8 @@ interface BreakfastApiService {
 //    suspend fun getItem(@Path("type") mealType: String): BreakfastResponse
 
 
-    @GET("/search?q=breakfast&app_id=fafcd302&app_key=76b9f87704af9178637d1b74796f09c6")
-    suspend fun getPhotos(@Query("q") type: String): BreakfastResponse
+    @GET("api/recipes/v2?type=public&app_id=fafcd302&app_key=76b9f87704af9178637d1b74796f09c6")
+    suspend fun getPhotos(@Query("q") type : String): BreakfastResponse
 }
 
 

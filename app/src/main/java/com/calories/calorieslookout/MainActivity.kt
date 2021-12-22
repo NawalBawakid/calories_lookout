@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -36,23 +37,26 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            // types menu
-//            R.id.breakfast -> {
-//                model.getMealsPhotos("breakfast")
-//                return true
-//            }
-//            R.id.lunch -> {
-//                model.getMealsPhotos("lunch")
-//                return true
-//            }
-//            R.id.dinner -> {
-//                model.getMealsPhotos("dinner")
-//                return true
-//            }
-//
-//            else -> return super.onOptionsItemSelected(item)
-//        }
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            // types menu
+            R.id.breakfast -> {
+                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
+                model.getMealsPhotos("breakfast")
+                return true
+            }
+
+            R.id.lunch -> {
+                model.getMealsPhotos("lunch")
+                return true
+            }
+
+            R.id.dinner -> {
+                model.getMealsPhotos("dinner")
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 }

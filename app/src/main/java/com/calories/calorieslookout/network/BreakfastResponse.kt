@@ -1,6 +1,7 @@
 package com.calories.calorieslookout.network
 
 import com.squareup.moshi.Json
+import kotlin.math.roundToInt
 
 data class BreakfastResponse(
 
@@ -482,7 +483,7 @@ data class Recipe(
     val source: String? = null,
 
     @Json(name="calories")
-    val calories: Double? = null,
+   private val calories: Double? = null,
 
     @Json(name="cuisineType")
     val cuisineType: List<String?>? = null,
@@ -519,7 +520,9 @@ data class Recipe(
 
     @Json(name="ingredientLines")
     val ingredientLines: List<String?>? = null
-)
+){
+    fun getCalories():String = calories?.roundToInt()?.toString()?:""
+}
 
 data class WATER(
 

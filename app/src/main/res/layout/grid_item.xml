@@ -8,55 +8,70 @@
     <data>
 
         <variable
-            name="Item"
+            name="item"
             type="com.calories.calorieslookout.network.HitsItem" />
     </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="40sp"
+        app:cardCornerRadius="10dp"
+        android:padding="30dp"
+        android:layout_margin="30dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/FoodItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="20sp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/poster_image"
-            android:layout_width="wrap_content"
+            android:layout_width="500dp"
             android:layout_height="170dp"
             android:adjustViewBounds="true"
-            android:padding="2dp"
+            app:cardCornerRadius="5dp"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageUrl="@{Item.recipe.image}"
+            app:imageUrl="@{item.recipe.image}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="40sp"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textColor="#2C2B2B"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:textColor="#0F2467"
+            android:textSize="15sp"
             android:textStyle="bold"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:layout_marginEnd="20sp"
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/poster_image"
-            app:textset="@{Item.recipe.label}" />
+            app:textset="@{item.recipe.label}" />
 
         <TextView
             android:id="@+id/caloriesnum"
             android:layout_width="wrap_content"
-            android:layout_height="40sp"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="#2C2B2B"
+            android:textColor="#0A1A50"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:text="@{String.valueOf(item.recipe.calories)}"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/title"
-            app:textset="@{Item.recipe.calories.toString()}" />
+        />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

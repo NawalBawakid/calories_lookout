@@ -78,7 +78,7 @@
                 android:textColor="#0A1A50"
                 app:layout_constraintStart_toEndOf="@id/imageView"
                 app:layout_constraintTop_toBottomOf="@id/title_id"
-                app:textset="@{mealViewModel.calories}"
+                app:textset="@{mealViewModel.calories.toString()}"
                 tools:text="1250" />
 
 
