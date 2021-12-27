@@ -4,30 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.calories.calorieslookout.LoginFragment"
-        android:label="Sign in">
+        android:label="LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_breakfastFragment"
-            app:destination="@id/breakfastFragment" />
+            android:id="@+id/action_loginFragment_to_breakfastFragment2"
+            app:destination="@id/breakfastFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/breakfastFragment"
+        android:id="@+id/breakfastFragment2"
         android:name="com.calories.calorieslookout.BreakfastFragment"
-        android:label="Meals">
+        android:label="BreakfastFragment" >
         <action
-            android:id="@+id/action_breakfastFragment_to_breakfastDescriptionFragment"
-            app:destination="@id/breakfastDescriptionFragment" />
+            android:id="@+id/action_breakfastFragment2_to_breakfastDescriptionFragment2"
+            app:destination="@id/breakfastDescriptionFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/breakfastDescriptionFragment"
+        android:id="@+id/breakfastDescriptionFragment2"
         android:name="com.calories.calorieslookout.BreakfastDescriptionFragment"
-        android:label="Recipe"
-        tools:layout="@layout/fragment_breakfast_description">
+        android:label="BreakfastDescriptionFragment" >
+        <action
+            android:id="@+id/action_breakfastDescriptionFragment2_to_breakfastFragment2"
+            app:destination="@id/breakfastFragment2" />
         <argument
             android:name="id"
             app:argType="integer" />
     </fragment>
+
 </navigation>

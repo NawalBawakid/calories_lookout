@@ -1,13 +1,13 @@
 package com.calories.calorieslookout.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.calories.calorieslookout.network.BreakfastApi
+import com.calories.calorieslookout.network.BreakfastApiService
 import com.calories.calorieslookout.network.HitsItem
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.logging.Logger
 
 enum class CaloriesApiStatus{LOADING, ERROR, DONE}
 class OverviewViewModel : ViewModel(){
@@ -16,7 +16,7 @@ class OverviewViewModel : ViewModel(){
     val status: LiveData<CaloriesApiStatus> = _status
 
     private val _infoItem = MutableLiveData<List<HitsItem?>?>()
-    val infoItem: LiveData<List<HitsItem?>?> = _infoItem
+    var infoItem: LiveData<List<HitsItem?>?> = _infoItem
 
     private val _photos = MutableLiveData<String>()
     val photos: LiveData<String> = _photos
@@ -30,6 +30,9 @@ class OverviewViewModel : ViewModel(){
     private val _calories = MutableLiveData<String>()
     val calories: LiveData<String> = _calories
 
+//    private val apiService = BreakfastApiService()
+    private val mutableSearchTerm = MutableLiveData<String>()
+
 
     init {
         getMealsPhotos("breakfast")
@@ -40,8 +43,12 @@ class OverviewViewModel : ViewModel(){
         viewModelScope.launch {
             _status.value = CaloriesApiStatus.LOADING
             try {
+                Log.e("try", "${ _infoItem.value}")
                 when(type){
-                    "breakfast" -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
+                    "breakfast" -> {
+                        _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
+                        Log.e("br", "${ _infoItem.value}")
+                    }
                     "lunch" -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("lunch").hits
                     "dinner" -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("dinner").hits
                     else -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
@@ -63,6 +70,20 @@ class OverviewViewModel : ViewModel(){
         _calories.value = item?.recipe?.getCalories()
     }
 
-
+    fun mealsSearch(query: String) {
+        viewModelScope.launch {
+            _status.value = CaloriesApiStatus.LOADING
+            try {
+                when(query){
+                    query -> _infoItem.value = BreakfastApi.retrofitService.getPhotos(query).hits
+                    else -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
+                }
+                _status.value = CaloriesApiStatus.DONE
+            } catch (e: Exception) {
+                _status.value = CaloriesApiStatus.ERROR
+                _infoItem.value = listOf()
+            }
+        }
+    }
 
 }

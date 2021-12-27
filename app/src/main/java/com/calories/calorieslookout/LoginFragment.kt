@@ -39,6 +39,11 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        setHasOptionsMenu(true)
+//        (activity as AppCompatActivity).supportActionBar?.hide()
+
+
+//        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
 
 
@@ -54,9 +59,9 @@ class LoginFragment : Fragment() {
         }
 
         binding.move.setOnClickListener{
-            var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment()
-//            holder.itemOfMovie.findNavController().navigate(action)
-            binding.move.findNavController().navigate(action)
+//            var action =
+////            holder.itemOfMovie.findNavController().navigate(action)
+//            binding.move.findNavController().navigate(action)
 
         }
     }
@@ -76,10 +81,12 @@ class LoginFragment : Fragment() {
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
-            var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment()
+            var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment2()
             binding.signin.findNavController().navigate(action)
         } else {
-
+//            var action = BreakfastFragmentDirections.actionBreakfastFragmentToLoginFragment()
+//            binding.signin.findNavController().navigate(action)
+            // test
         }
     }
 

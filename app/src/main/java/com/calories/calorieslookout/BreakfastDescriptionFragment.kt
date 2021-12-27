@@ -5,11 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
 import com.calories.calorieslookout.databinding.FragmentLoginBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
@@ -30,6 +33,9 @@ class BreakfastDescriptionFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+//        getActivity().supportActionBar().hide()
+
         arguments.let {
             index = it!!.getInt("id")
         }
@@ -39,6 +45,7 @@ class BreakfastDescriptionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         binding = FragmentBreakfastDescriptionBinding.inflate(inflater, container, false)
         return binding!!.root
     }
@@ -67,5 +74,44 @@ class BreakfastDescriptionFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.breakfast -> {
+                Log.e("test", "onOptionsItemSelected: breakfast")
+                viewModel.getMealsPhotos("breakfast")
+                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
+                findNavController().navigate(action)
+                return true
+            }
+
+            R.id.lunch -> {
+                viewModel.getMealsPhotos("lunch")
+                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
+                findNavController().navigate(action)
+                return true
+            }
+
+            R.id.dinner -> {
+                viewModel.getMealsPhotos("dinner")
+                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
+                findNavController().navigate(action)
+                return true
+            }
+
+            else -> {
+                Log.e("test", "onOptionsItemSelected: else")
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
 
 }

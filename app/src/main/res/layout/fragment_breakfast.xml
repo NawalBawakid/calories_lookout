@@ -21,17 +21,27 @@ tools:context="com.example.moviesapplication.overview.OverviewFragment">
         android:id="@+id/itemGrid"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#D6D3D3"
+
         android:clipToPadding="false"
         android:padding="7dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search"
         app:listData="@{OverViewModel.infoItem}"
         app:spanCount="1"
         tools:itemCount="16" />
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="400sp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_round_courner"
+        android:layout_marginTop="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/status_image"
@@ -42,6 +52,20 @@ tools:context="com.example.moviesapplication.overview.OverviewFragment">
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:calorieApiStatus="@{OverViewModel.status}" />
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/buttomNav"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:itemBackground="@color/black"-->
+<!--        app:itemIconTint="@color/white"-->
+<!--        app:itemTextColor="@color/white"-->
+<!--        app:menu="@menu/menu"-->
+
+<!--        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -86,7 +86,6 @@
                 android:id="@+id/recipe"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:paddingBottom="10sp"
                 android:textSize="20sp"
                 android:text="Recipe"
