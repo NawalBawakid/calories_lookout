@@ -44,7 +44,7 @@ class GridAdapter : androidx.recyclerview.widget.ListAdapter<HitsItem, GridAdapt
 
         holder.bind(listMeal)
         holder.itemOfMeal.setOnClickListener {
-            var action = BreakfastFragmentDirections.actionBreakfastFragmentToBreakfastDescriptionFragment(id = position)
+            var action = BreakfastFragmentDirections.actionBreakfastFragment2ToBreakfastDescriptionFragment2(id = position)
             holder.itemOfMeal.findNavController().navigate(action)
 
         }

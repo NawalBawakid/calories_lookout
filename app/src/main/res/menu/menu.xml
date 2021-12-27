@@ -14,4 +14,18 @@
         android:title="Dinner Meals"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/calculation"
+        android:title="Calories Calculation"
+        app:showAsAction="never"/>
+
+<!--    <item android:id="@+id/search"-->
+<!--        android:title="search"-->
+<!--        android:icon="@drawable/ic_baseline_search_24"-->
+<!--        app:showAsAction="ifRoom|withText"-->
+<!--        app:actionViewClass="android.widget.SearchView" />-->
+
+    <item android:id="@+id/signout"
+        android:title="Sign Out"
+        app:showAsAction="never" />
+
 </menu>
