@@ -34,11 +34,15 @@ fun bindImage(ImageView: ImageView, imageUrl: String?) {
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<HitsItem?>?) {
     Log.e("infooo","$data")
-
     val adapter = recyclerView.adapter as GridAdapter
     adapter.submitList(data)
+}
 
-
+@BindingAdapter("favoriteData")
+fun bindFavoriteRecyclerView(recyclerView: RecyclerView, data: List<HitsItem?>?) {
+    Log.e("infooo","$data")
+    val adapter = recyclerView.adapter as FavoriteAdapter
+    adapter.submitList(data)
 }
 
 

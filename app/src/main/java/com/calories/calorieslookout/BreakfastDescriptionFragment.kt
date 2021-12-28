@@ -6,16 +6,23 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.calories.calorieslookout.database.CaloriesData
+import com.calories.calorieslookout.databinding.FragmentBreakfastBinding
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
 import com.calories.calorieslookout.databinding.FragmentLoginBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class BreakfastDescriptionFragment : Fragment() {
@@ -24,9 +31,14 @@ class BreakfastDescriptionFragment : Fragment() {
 //        const val SEARCH_PREFIX = "https://www.google.com/search?q="
 //    }
 
-    private var binding: FragmentBreakfastDescriptionBinding? = null
+    private var _binding: FragmentBreakfastDescriptionBinding? = null
+    private lateinit var binding:FragmentBreakfastDescriptionBinding
 
     private val viewModel: OverviewViewModel by activityViewModels()
+
+    private var isFavorite = true
+
+    private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
 
 
     var index = 0
@@ -45,9 +57,16 @@ class BreakfastDescriptionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
+        _binding = FragmentBreakfastDescriptionBinding.inflate(inflater)
+        binding=_binding!!
+
         binding = FragmentBreakfastDescriptionBinding.inflate(inflater, container, false)
+
+        (context as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        setHasOptionsMenu(true)
+
         return binding!!.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,16 +87,28 @@ class BreakfastDescriptionFragment : Fragment() {
             }
         }
 
-    }
+        binding?.disLike?.setOnClickListener{
+            if(isFavorite){
+                binding!!.like.visibility = View.VISIBLE
+                isFavorite = false
+                binding!!.like.visibility = View.VISIBLE
+                binding!!.disLike.visibility = View.GONE
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+               val displyData = viewModel.favorite(index)
+                addtoFirebase(displyData)
+
+            }else{
+                isFavorite = true
+                binding!!.disLike.visibility = View.VISIBLE
+                binding!!.like.visibility = View.GONE
+            }
+        }
+
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
+        //menu.clear()
         inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -106,6 +137,23 @@ class BreakfastDescriptionFragment : Fragment() {
                 return true
             }
 
+            R.id.calculation -> {
+                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
+                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+                this?.startActivity(intent)
+                return true
+            }
+
+            R.id.signout -> {
+                FirebaseAuth.getInstance().signOut()
+                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToLoginFragment()
+                findNavController().navigate(action)
+
+//                var action = BreakfastFragmentDirections.actionBreakfastFragmentToNavGraph2()
+//                findNavController(R.id.overviewFragment).navigate(action)
+                return true
+            }
+
             else -> {
                 Log.e("test", "onOptionsItemSelected: else")
                 return super.onOptionsItemSelected(item)
@@ -113,5 +161,12 @@ class BreakfastDescriptionFragment : Fragment() {
         }
     }
 
+private fun addtoFirebase(itemFavorate : CaloriesData){
+    CaloriesDataCollection.add(itemFavorate).addOnCompleteListener{task ->
+            if (task.isSuccessful){
+//                Toast.makeText(this.requireContext(), "Added to fov", Toast.LENGTH_SHORT).show()
+            }
+        }
+}
 
 }

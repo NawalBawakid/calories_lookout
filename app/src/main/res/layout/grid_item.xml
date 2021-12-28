@@ -2,8 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#DBF1DC">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,13 +12,13 @@
     </data>
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardElevation="40sp"
-        app:cardCornerRadius="10dp"
-        android:padding="30dp"
-        android:layout_margin="30dp">
+<!--    <com.google.android.material.card.MaterialCardView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:cardElevation="40sp"-->
+<!--        app:cardCornerRadius="10dp"-->
+<!--        android:padding="30dp"-->
+<!--        android:layout_margin="30dp">-->
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +31,7 @@
 
         <ImageView
             android:id="@+id/poster_image"
-            android:layout_width="500dp"
+            android:layout_width="400dp"
             android:layout_height="170dp"
             android:adjustViewBounds="true"
             app:cardCornerRadius="5dp"
@@ -70,6 +69,26 @@
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
+<!--        <ImageView-->
+<!--            android:id="@+id/disLike"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="40sp"-->
+<!--            app:srcCompat="@drawable/ic_baseline_favorite_border_24"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/title"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/poster_image"/>-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/like"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="40sp"-->
+<!--            app:srcCompat="@drawable/ic_baseline_favorite_24"-->
+<!--            android:visibility="invisible"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/title"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/poster_image"/>-->
+
         <TextView
             android:id="@+id/noresult"
             android:layout_width="wrap_content"
@@ -94,6 +113,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+<!--    </com.google.android.material.card.MaterialCardView>-->
 
 </layout>

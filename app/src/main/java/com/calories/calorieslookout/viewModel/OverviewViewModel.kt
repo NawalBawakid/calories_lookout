@@ -2,6 +2,7 @@ package com.calories.calorieslookout.viewModel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.calories.calorieslookout.database.CaloriesData
 import com.calories.calorieslookout.network.BreakfastApi
 import com.calories.calorieslookout.network.BreakfastApiService
 import com.calories.calorieslookout.network.HitsItem
@@ -32,6 +33,9 @@ class OverviewViewModel : ViewModel(){
 
 //    private val apiService = BreakfastApiService()
     private val mutableSearchTerm = MutableLiveData<String>()
+
+    val favoritList: MutableList<CaloriesData> = mutableListOf()
+
 
 
     init {
@@ -70,6 +74,7 @@ class OverviewViewModel : ViewModel(){
         _calories.value = item?.recipe?.getCalories()
     }
 
+
     fun mealsSearch(query: String) {
         viewModelScope.launch {
             _status.value = CaloriesApiStatus.LOADING
@@ -85,5 +90,25 @@ class OverviewViewModel : ViewModel(){
             }
         }
     }
+
+
+    fun favorite(index: Int) : CaloriesData{
+        var item = _infoItem.value?.get(index)
+
+        _photos.value = item?.recipe?.image
+        _title.value = item?.recipe?.label
+        _calories.value = item?.recipe?.getCalories()
+
+        return CaloriesData(_photos.value,_title.value ,_calories.value?.toDouble())
+    }
+
+//    fun addFavorite(favoritList: CaloriesData){
+//        favoritList.add()
+//    }
+
+
+//    fun addTask(taskModel: CaloriesData) {
+//        taskModel.add(taskModel)
+//    }
 
 }

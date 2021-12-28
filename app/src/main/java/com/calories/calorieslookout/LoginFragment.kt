@@ -58,12 +58,12 @@ class LoginFragment : Fragment() {
 //            }
         }
 
-        binding.move.setOnClickListener{
-//            var action =
+//        binding.move.setOnClickListener{
+//            var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment2()
 ////            holder.itemOfMovie.findNavController().navigate(action)
 //            binding.move.findNavController().navigate(action)
-
-        }
+//
+//        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +86,7 @@ class LoginFragment : Fragment() {
         } else {
 //            var action = BreakfastFragmentDirections.actionBreakfastFragmentToLoginFragment()
 //            binding.signin.findNavController().navigate(action)
-            // test
+
         }
     }
 
