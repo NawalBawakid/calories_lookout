@@ -12,12 +12,9 @@ data class CaloriesData (
         val label: String? = null,
 
         @Json(name="calories")
-        private val calories: Double? = null
+         val calories: Double? = null
+
 
     ){
-        fun getCalories():String = calories?.roundToInt()?.toString()?:""
-    }
 
-
-//class TaskModel(var checked: Boolean, var task: String, var dueDate: String, var description: String) {
-//}
+}

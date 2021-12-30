@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.calories.calorieslookout.adapter.FavoriteAdapter
 import com.calories.calorieslookout.adapter.GridAdapter
-import com.calories.calorieslookout.database.CaloriesData
+
 import com.calories.calorieslookout.databinding.FavoriteItemBinding
 import com.calories.calorieslookout.databinding.FragmentBreakfastBinding
 import com.calories.calorieslookout.databinding.FragmentFavoriteBinding
@@ -24,7 +24,6 @@ class FavoriteFragment : Fragment() {
 
     private val viewModel: OverviewViewModel by activityViewModels()
 
-    private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
 
     private var _binding: FragmentFavoriteBinding? = null
     private lateinit var binding:FragmentFavoriteBinding
@@ -53,27 +52,12 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // to show the calories num befor the comma only
-        viewModel.calories.observe(this.viewLifecycleOwner, {
-        })
+//        viewModel.calories.observe(this.viewLifecycleOwner, {
+//        })
 
-        retriveData()
-    }
+       viewModel.retriveData()
 
-    fun retriveData(){
-        CaloriesDataCollection.get().addOnCompleteListener{task ->
-            if (task.isSuccessful) {
-                val item = StringBuilder()
-                for (data in task.result!!.documents) {
-                    val user = data.toObject<CaloriesData>()
-                    item.append("$user \n")
-                }
-//                binding.favoriteItem = item
-            }else{
 
-            }
-        }.addOnFailureListener {
-            println(it.message)
-        }
     }
 
 }

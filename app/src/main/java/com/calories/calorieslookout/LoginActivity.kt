@@ -36,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        // Bottom Navigation
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomnav)
         val navController = findNavController(R.id.nav_host_fragment_content_login)
 

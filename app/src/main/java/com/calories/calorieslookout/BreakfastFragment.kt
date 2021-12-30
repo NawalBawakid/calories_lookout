@@ -98,8 +98,8 @@ class BreakfastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
            // to show the calories num befor the comma only
-        viewModel.calories.observe(this.viewLifecycleOwner,{
-        })
+//        viewModel.calories.observe(this.viewLifecycleOwner,{
+//        })
 
 
 

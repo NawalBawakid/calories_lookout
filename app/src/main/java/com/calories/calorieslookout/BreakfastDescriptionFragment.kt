@@ -1,28 +1,18 @@
 package com.calories.calorieslookout
 
-import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.calories.calorieslookout.database.CaloriesData
-import com.calories.calorieslookout.databinding.FragmentBreakfastBinding
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
-import com.calories.calorieslookout.databinding.FragmentLoginBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+
 
 
 class BreakfastDescriptionFragment : Fragment() {
@@ -37,8 +27,6 @@ class BreakfastDescriptionFragment : Fragment() {
     private val viewModel: OverviewViewModel by activityViewModels()
 
     private var isFavorite = true
-
-    private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
 
 
     var index = 0
@@ -65,7 +53,7 @@ class BreakfastDescriptionFragment : Fragment() {
         (context as AppCompatActivity).setSupportActionBar(binding.toolbar)
         setHasOptionsMenu(true)
 
-        return binding!!.root
+        return binding.root
 
     }
 
@@ -73,7 +61,7 @@ class BreakfastDescriptionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var item = viewModel.infoItem.value?.get(index)?.recipe?.url
 
-        binding?.apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
             mealViewModel = viewModel
             detailsBreakfastFragment = this@BreakfastDescriptionFragment
@@ -87,20 +75,38 @@ class BreakfastDescriptionFragment : Fragment() {
             }
         }
 
-        binding?.disLike?.setOnClickListener{
+        binding.disLike.setOnClickListener{
             if(isFavorite){
-                binding!!.like.visibility = View.VISIBLE
+                binding.like.visibility = View.VISIBLE
                 isFavorite = false
-                binding!!.like.visibility = View.VISIBLE
-                binding!!.disLike.visibility = View.GONE
+                binding.like.visibility = View.VISIBLE
+                binding.disLike.visibility = View.GONE
 
                val displyData = viewModel.favorite(index)
-                addtoFirebase(displyData)
+                viewModel.addtoFirebase(displyData)
 
             }else{
                 isFavorite = true
-                binding!!.disLike.visibility = View.VISIBLE
-                binding!!.like.visibility = View.GONE
+                binding.disLike.visibility = View.VISIBLE
+                binding.like.visibility = View.GONE
+            }
+        }
+
+        binding.like.setOnClickListener{
+            if(isFavorite){
+                binding.like.visibility = View.VISIBLE
+                isFavorite = false
+                binding.like.visibility = View.VISIBLE
+                binding.disLike.visibility = View.GONE
+
+                val displyData = viewModel.favorite(index)
+                viewModel.addtoFirebase(displyData)
+               // viewModel.removeData(displyData)
+
+            }else{
+                isFavorite = true
+                binding.disLike.visibility = View.VISIBLE
+                binding.like.visibility = View.GONE
             }
         }
 
@@ -161,12 +167,5 @@ class BreakfastDescriptionFragment : Fragment() {
         }
     }
 
-private fun addtoFirebase(itemFavorate : CaloriesData){
-    CaloriesDataCollection.add(itemFavorate).addOnCompleteListener{task ->
-            if (task.isSuccessful){
-//                Toast.makeText(this.requireContext(), "Added to fov", Toast.LENGTH_SHORT).show()
-            }
-        }
-}
 
 }

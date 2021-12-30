@@ -10,7 +10,8 @@ import com.calories.calorieslookout.databinding.GridItemBinding
 import com.calories.calorieslookout.network.HitsItem
 
 
-class GridAdapter : androidx.recyclerview.widget.ListAdapter<HitsItem, GridAdapter.ResultsItemViewHolder>(DiffCallback) {
+class GridAdapter :
+    androidx.recyclerview.widget.ListAdapter<HitsItem, GridAdapter.ResultsItemViewHolder>(DiffCallback) {
 
 
     class ResultsItemViewHolder(private var binding: GridItemBinding) : RecyclerView.ViewHolder(binding.root) {

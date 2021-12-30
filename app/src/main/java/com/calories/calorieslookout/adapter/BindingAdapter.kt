@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.startup.StartupLogger.i
 import com.bumptech.glide.Glide
 import com.calories.calorieslookout.R
+import com.calories.calorieslookout.database.CaloriesData
+
 import com.calories.calorieslookout.network.HitsItem
 import com.calories.calorieslookout.viewModel.CaloriesApiStatus
 import java.util.logging.Logger
@@ -39,7 +41,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<HitsItem?>?) {
 }
 
 @BindingAdapter("favoriteData")
-fun bindFavoriteRecyclerView(recyclerView: RecyclerView, data: List<HitsItem?>?) {
+fun bindFavoriteRecyclerView(recyclerView: RecyclerView, data: List<CaloriesData?>?) {
     Log.e("infooo","$data")
     val adapter = recyclerView.adapter as FavoriteAdapter
     adapter.submitList(data)

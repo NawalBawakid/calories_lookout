@@ -6,11 +6,11 @@
     <data>
         <variable
             name="item"
-            type="com.calories.calorieslookout.network.HitsItem" />
+            type="com.calories.calorieslookout.database.CaloriesData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/FoodItem"
+        android:id="@+id/favoriteItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -25,7 +25,7 @@
             app:cardCornerRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageUrl="@{item.recipe.image}"
+            app:imageUrl="@{item.image}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="40sp"
             app:srcCompat="@drawable/ic_baseline_favorite_border_24"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="40sp"
             app:srcCompat="@drawable/ic_baseline_favorite_24"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -62,7 +62,7 @@
             android:layout_marginStart="30dp"
             app:layout_constraintStart_toEndOf="@id/poster_image"
             app:layout_constraintTop_toTopOf="parent"
-            app:textset="@{item.recipe.label}" />
+            app:textset="@{item.label}" />
 
         <TextView
             android:id="@+id/caloriesnum"
@@ -75,7 +75,7 @@
             android:paddingStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginStart="30dp"
-            android:text="@{String.valueOf(item.recipe.calories)}"
+            android:text="@{String.valueOf(item.calories)}"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/title" />
