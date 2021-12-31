@@ -1,14 +1,18 @@
 package com.calories.calorieslookout
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.calories.calorieslookout.databinding.FragmentLoginBinding
+import com.calories.calorieslookout.sharedPrefrence.setPrefsString
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -58,12 +62,12 @@ class LoginFragment : Fragment() {
 //            }
         }
 
-        binding.move.setOnClickListener{
-//            var action =
+//        binding.move.setOnClickListener{
+//            var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment2()
 ////            holder.itemOfMovie.findNavController().navigate(action)
 //            binding.move.findNavController().navigate(action)
-
-        }
+//
+//        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,13 +85,32 @@ class LoginFragment : Fragment() {
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
+         //   setPrefsString(this, id.toString(), user!!.uid)
+
+            val prefrence = context?.getSharedPreferences("inventry", Context.MODE_PRIVATE)
+            var editor = prefrence?.edit()
+            editor?.putString("id", user?.uid)
+            editor?.commit()
+
+
+
+//            user.let {
+//                val id = user?.uid
+//            }
+
+
+            //Toast.makeText(requireContext(), "${user?.uid}", Toast.LENGTH_SHORT).show()
             var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment2()
             binding.signin.findNavController().navigate(action)
         } else {
 //            var action = BreakfastFragmentDirections.actionBreakfastFragmentToLoginFragment()
 //            binding.signin.findNavController().navigate(action)
-            // test
+
         }
     }
+
+//    fun setPrefrence(context: Context, key:String, value: String){
+//        context.getSharedPreferences(PREF)
+//    }
 
 }

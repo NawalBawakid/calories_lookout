@@ -1,6 +1,6 @@
 package com.calories.calorieslookout
 
-import android.content.ClipData
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,13 +9,11 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
-import com.calories.calorieslookout.databinding.FragmentLoginBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
+import com.google.firebase.auth.FirebaseAuth
+
 
 
 class BreakfastDescriptionFragment : Fragment() {
@@ -24,9 +22,12 @@ class BreakfastDescriptionFragment : Fragment() {
 //        const val SEARCH_PREFIX = "https://www.google.com/search?q="
 //    }
 
-    private var binding: FragmentBreakfastDescriptionBinding? = null
+    private var _binding: FragmentBreakfastDescriptionBinding? = null
+    private lateinit var binding:FragmentBreakfastDescriptionBinding
 
     private val viewModel: OverviewViewModel by activityViewModels()
+
+    private var isFavorite = true
 
 
     var index = 0
@@ -45,16 +46,23 @@ class BreakfastDescriptionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
+        _binding = FragmentBreakfastDescriptionBinding.inflate(inflater)
+        binding=_binding!!
+
         binding = FragmentBreakfastDescriptionBinding.inflate(inflater, container, false)
-        return binding!!.root
+
+        (context as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        setHasOptionsMenu(true)
+
+        return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var item = viewModel.infoItem.value?.get(index)?.recipe?.url
 
-        binding?.apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
             mealViewModel = viewModel
             detailsBreakfastFragment = this@BreakfastDescriptionFragment
@@ -68,16 +76,55 @@ class BreakfastDescriptionFragment : Fragment() {
             }
         }
 
-    }
+        binding.disLike.setOnClickListener {
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+            if (isFavorite) {
+
+                binding.like.visibility = View.VISIBLE
+                isFavorite = false
+                binding.like.visibility = View.VISIBLE
+                binding.disLike.visibility = View.GONE
+
+                // isFavorite = !isFavorite
+                val prefrence = context?.getSharedPreferences("inventry", Context.MODE_PRIVATE)
+                var getKey = prefrence?.getString("id", "0")
+
+                val displyData = viewModel.favorite(index,getKey!!)
+                viewModel.addtoFirebase(displyData)
+
+
+
+
+            } else {
+                isFavorite = true
+                binding.disLike.visibility = View.VISIBLE
+                binding.like.visibility = View.GONE
+            }
+        }
+
+        binding.like.setOnClickListener{
+            if(isFavorite){
+                binding.like.visibility = View.VISIBLE
+                isFavorite = false
+                binding.like.visibility = View.VISIBLE
+                binding.disLike.visibility = View.GONE
+
+                val displyData = viewModel.favorite(index,"")
+                viewModel.addtoFirebase(displyData)
+               // viewModel.removeData(displyData)
+
+            }else{
+                isFavorite = true
+                binding.disLike.visibility = View.VISIBLE
+                binding.like.visibility = View.GONE
+            }
+        }
+
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
+        //menu.clear()
         inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -103,6 +150,23 @@ class BreakfastDescriptionFragment : Fragment() {
                 viewModel.getMealsPhotos("dinner")
                 var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
                 findNavController().navigate(action)
+                return true
+            }
+
+            R.id.calculation -> {
+                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
+                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+                this?.startActivity(intent)
+                return true
+            }
+
+            R.id.signout -> {
+                FirebaseAuth.getInstance().signOut()
+                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToLoginFragment()
+                findNavController().navigate(action)
+
+//                var action = BreakfastFragmentDirections.actionBreakfastFragmentToNavGraph2()
+//                findNavController(R.id.overviewFragment).navigate(action)
                 return true
             }
 

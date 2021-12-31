@@ -521,7 +521,9 @@ data class Recipe(
     @Json(name="ingredientLines")
     val ingredientLines: List<String?>? = null
 ){
-    fun getCalories():String = calories?.roundToInt()?.toString()?:""
+    fun getCaloriesAsString():String = calories?.roundToInt()?.toString()?:""
+    fun getCalories():Double = calories?:0.0
+
 }
 
 data class WATER(

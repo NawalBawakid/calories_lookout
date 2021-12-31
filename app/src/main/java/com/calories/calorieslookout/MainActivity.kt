@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,9 +23,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
+    private val favoratFragment = FavoriteFragment()
+
     private lateinit var navController: NavController
 
-    //var firebaseAuth = FirebaseAuth()
+    // var firebaseAuth = FirebaseAuth()
 
     val model: OverviewViewModel by viewModels()
 
@@ -37,8 +40,18 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.overviewFragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setupActionBarWithNavController(navController)
+        //setupActionBarWithNavController(navController)
+
+       // replaceFragment(favoratFragment)
     }
+
+//    private fun replaceFragment(fragment: Fragment){
+//        if (fragment != null){
+//            val transaction = supportFragmentManager.beginTransaction()
+//            transaction.replace(R.id.fragmentContainer, fragment)
+//            transaction.commit()
+//        }
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
@@ -46,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        return true
+        return false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -68,8 +81,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.dinner -> {
                 model.getMealsPhotos("dinner")
-//                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragmentToBreakfastFragment()
-//                findNavController(R.id.overviewFragment).navigate(action)
+              //var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragmentToBreakfastFragment()
+              //findNavController(R.id.overviewFragment).navigate(action)
                 return true
             }
 
