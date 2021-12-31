@@ -11,10 +11,15 @@ data class CaloriesData (
         @Json(name="label")
         val label: String? = null,
 
-        @Json(name="calories")
-         val calories: Double? = null
+        @Json(name="calories1323")
+         val calories: Double? = null,
+
+        @Json(name="source")
+        val source: String? = null,
+
+        @Json(name="Key")
+        val Key: String? = null
+
+    )
 
 
-    ){
-
-}

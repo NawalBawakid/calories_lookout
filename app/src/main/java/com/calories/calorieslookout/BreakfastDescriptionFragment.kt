@@ -1,5 +1,6 @@
 package com.calories.calorieslookout
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -75,17 +76,26 @@ class BreakfastDescriptionFragment : Fragment() {
             }
         }
 
-        binding.disLike.setOnClickListener{
-            if(isFavorite){
+        binding.disLike.setOnClickListener {
+
+            if (isFavorite) {
+
                 binding.like.visibility = View.VISIBLE
                 isFavorite = false
                 binding.like.visibility = View.VISIBLE
                 binding.disLike.visibility = View.GONE
 
-               val displyData = viewModel.favorite(index)
+                // isFavorite = !isFavorite
+                val prefrence = context?.getSharedPreferences("inventry", Context.MODE_PRIVATE)
+                var getKey = prefrence?.getString("id", "0")
+
+                val displyData = viewModel.favorite(index,getKey!!)
                 viewModel.addtoFirebase(displyData)
 
-            }else{
+
+
+
+            } else {
                 isFavorite = true
                 binding.disLike.visibility = View.VISIBLE
                 binding.like.visibility = View.GONE
@@ -99,7 +109,7 @@ class BreakfastDescriptionFragment : Fragment() {
                 binding.like.visibility = View.VISIBLE
                 binding.disLike.visibility = View.GONE
 
-                val displyData = viewModel.favorite(index)
+                val displyData = viewModel.favorite(index,"")
                 viewModel.addtoFirebase(displyData)
                // viewModel.removeData(displyData)
 

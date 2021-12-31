@@ -8,6 +8,8 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -19,11 +21,15 @@ import com.calories.calorieslookout.databinding.FavoriteItemBinding
 import com.calories.calorieslookout.network.HitsItem
 import com.calories.calorieslookout.viewModel.OverviewViewModel
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class FavoriteAdapter: ListAdapter<CaloriesData, FavoriteAdapter.ResultsItemViewHolder>(DiffCallback) {
     private var isFavorite = true
     private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
+
+//    private val _likeItem = MutableLiveData<List<CaloriesData?>?>()
+//    var likeItem: LiveData<List<CaloriesData?>?> = _likeItem
 
     class ResultsItemViewHolder(private var binding: FavoriteItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -63,7 +69,7 @@ class FavoriteAdapter: ListAdapter<CaloriesData, FavoriteAdapter.ResultsItemView
 //            //CaloriesData[position].C = isChecked
 //
 //        }
-        
+
         holder.favoriteButton.setOnClickListener{
             if(isFavorite){
                 holder.favoriteButton.visibility = View.VISIBLE
@@ -71,8 +77,8 @@ class FavoriteAdapter: ListAdapter<CaloriesData, FavoriteAdapter.ResultsItemView
                 holder.favoriteButton.visibility = View.VISIBLE
                 holder.disLikeButton.visibility = View.GONE
 
-               // val oldData = getOldData()
-                //removeData(oldData)
+               // val oldData = retriveData()
+                //removeData()
             }else{
                 isFavorite = true
                 holder.disLikeButton.visibility = View.VISIBLE
@@ -103,6 +109,26 @@ class FavoriteAdapter: ListAdapter<CaloriesData, FavoriteAdapter.ResultsItemView
 
             }
     }
+
+//    fun retriveData(){
+//        CaloriesDataCollection.get().addOnCompleteListener{task ->
+//            if (task.isSuccessful) {
+//                val item = mutableListOf<CaloriesData>()
+//                for (data in task.result!!.documents) {
+//                    val calories = data.toObject<CaloriesData>()
+//                    item.add(calories!!)
+//                }
+//                Log.d("TAG", "retriveData: $item")
+//                _likeItem.value=item
+////                binding.favoriteItem = item
+//            }else{
+//
+//            }
+//        }.addOnFailureListener {
+//            println(it.message)
+//        }
+//    }
+
 
 
 //    fun getOldData(): CaloriesData{

@@ -81,8 +81,8 @@ class MainActivity : AppCompatActivity() {
 
             R.id.dinner -> {
                 model.getMealsPhotos("dinner")
-//                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragmentToBreakfastFragment()
-//                findNavController(R.id.overviewFragment).navigate(action)
+              //var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragmentToBreakfastFragment()
+              //findNavController(R.id.overviewFragment).navigate(action)
                 return true
             }
 

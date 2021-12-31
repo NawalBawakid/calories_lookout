@@ -1,5 +1,6 @@
 package com.calories.calorieslookout.viewModel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.calories.calorieslookout.database.CaloriesData
@@ -13,6 +14,10 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.util.logging.Logger
+import android.database.sqlite.SQLiteDatabase
+
+
+
 
 enum class CaloriesApiStatus{LOADING, ERROR, DONE}
 class OverviewViewModel : ViewModel(){
@@ -42,6 +47,14 @@ class OverviewViewModel : ViewModel(){
 
     private val _caloriesNum = MutableLiveData<Double>()
     val caloriesNum: LiveData<Double> = _caloriesNum
+
+    private val _foodId = MutableLiveData<String>()
+    val foodId: LiveData<String> = _foodId
+
+
+//    private val _isFavorite = MutableLiveData<Boolean>()
+//    val isFavorite: LiveData<Boolean> = _isFavorite
+
 
 //    private val apiService = BreakfastApiService()
     private val mutableSearchTerm = MutableLiveData<String>()
@@ -104,21 +117,23 @@ class OverviewViewModel : ViewModel(){
     }
 
 
-    fun favorite(index: Int) : CaloriesData{
+    fun favorite(index: Int, userID: String) : CaloriesData{
         var item = _infoItem.value?.get(index)
 
         _photos.value = item?.recipe?.image
         _title.value = item?.recipe?.label
         _calories.value = item?.recipe?.getCaloriesAsString()
+        _foodId.value = item?.recipe?.source
 
-
-        return CaloriesData(item?.recipe?.image,item?.recipe?.label,item?.recipe?.getCalories())
+//, item?.recipe?.source, userID
+        return CaloriesData(item?.recipe?.image,item?.recipe?.label,item?.recipe?.getCalories(), item?.recipe?.source, userID)
     }
 
 
     fun addtoFirebase(itemFavorate : CaloriesData){
         CaloriesDataCollection.add(itemFavorate).addOnCompleteListener{task ->
             if (task.isSuccessful){
+               // val document = task.result
 //                Toast.makeText(this.requireContext(), "Added to fov", Toast.LENGTH_SHORT).show()
             }
         }
@@ -144,24 +159,34 @@ class OverviewViewModel : ViewModel(){
         }
     }
 
+    fun favoriteCheck(index: Int){
+        var item = _infoItem.value?.get(index)
+        
+//        if (item.recipe.source == retriveData()){
+//
+//        }
+    }
 
-//    fun removeData(itemFavorate : CaloriesData){
-//        CaloriesDataCollection.whereEqualTo("image", itemFavorate.image)
-//            .whereEqualTo("label", itemFavorate.label)
-//            .whereEqualTo("calories", itemFavorate.calories)
-//            .get()
-//            .addOnCompleteListener{ task ->
-//                if (task.isSuccessful){
-//                    if (task.result!!.documents.isNotEmpty()){
-//                        for (data in task.result!!.documents){
-//                            CaloriesDataCollection.document(data.id).delete()
-//                        }
-//                    }else{
-//
-//                    }
-//                }
-//
-//            }
-//    }
+
+    fun removeData(itemFavorate : CaloriesData){
+        CaloriesDataCollection.whereEqualTo("image", itemFavorate.image)
+            .whereEqualTo("label", itemFavorate.label)
+            .whereEqualTo("calories", itemFavorate.calories)
+            .get()
+            .addOnCompleteListener{ task ->
+                if (task.isSuccessful){
+                    if (task.result!!.documents.isNotEmpty()){
+                        for (data in task.result!!.documents){
+                            CaloriesDataCollection.document(data.id).delete()
+                        }
+                    }else{
+
+                    }
+                }
+
+            }
+    }
+
+
 
 }
