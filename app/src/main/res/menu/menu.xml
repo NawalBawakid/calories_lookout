@@ -14,9 +14,9 @@
         android:title="Dinner Meals"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/calculation"
-        android:title="Calories Calculation"
-        app:showAsAction="never"/>
+<!--    <item android:id="@+id/calculation"-->
+<!--        android:title="Calories Calculation"-->
+<!--        app:showAsAction="never"/>-->
 
 <!--    <item android:id="@+id/search"-->
 <!--        android:title="search"-->
@@ -27,5 +27,9 @@
     <item android:id="@+id/signout"
         android:title="Sign Out"
         app:showAsAction="never" />
+
+<!--    <item android:id="@+id/testFragment"-->
+<!--        android:title="test"-->
+<!--        app:showAsAction="never" />-->
 
 </menu>

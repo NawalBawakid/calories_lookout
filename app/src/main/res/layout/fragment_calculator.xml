@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginTop="70dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calculator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="20sp"
+        android:gravity="center"
+        android:background="#E9FDFCFC">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/calories_logo" />
+
+        <EditText
+            android:id="@+id/weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Weight"
+            android:textSize="20sp"
+            android:layout_marginEnd="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:inputType="number"
+            android:digits="0123456789."
+            app:layout_constraintStart_toStartOf="@id/logo"
+            app:layout_constraintEnd_toEndOf="@id/logo"
+            app:layout_constraintTop_toBottomOf="@id/logo"/>
+
+        <EditText
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Height"
+            android:textSize="20sp"
+            android:layout_marginEnd="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:inputType="number"
+            android:digits="0123456789."
+            app:layout_constraintStart_toStartOf="@id/weight"
+            app:layout_constraintEnd_toEndOf="@id/weight"
+            app:layout_constraintTop_toBottomOf="@id/weight" />
+
+        <EditText
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:textSize="20sp"
+            android:inputType="number"
+            android:digits="0123456789."
+            android:layout_marginEnd="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            app:layout_constraintStart_toStartOf="@id/weight"
+            app:layout_constraintEnd_toEndOf="@id/weight"
+            app:layout_constraintTop_toBottomOf="@id/height" />
+
+        <RadioGroup
+            android:id="@+id/chooseButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintEnd_toEndOf="@id/weight"
+            app:layout_constraintStart_toStartOf="@id/weight"
+            app:layout_constraintTop_toBottomOf="@id/age">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:textSize="20sp"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/cacculate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:textSize="15sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20sp"
+            android:background="@drawable/round_corner_top"
+            app:layout_constraintStart_toStartOf="@id/weight"
+            app:layout_constraintEnd_toEndOf="@id/weight"
+            app:layout_constraintTop_toBottomOf="@id/chooseButton"/>
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/weight"
+            app:layout_constraintStart_toStartOf="@id/weight"
+            app:layout_constraintTop_toBottomOf="@id/cacculate" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/blank"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="40sp"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textColor="#E60505"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/weight"-->
+<!--            app:layout_constraintStart_toStartOf="@id/weight"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cacculate" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

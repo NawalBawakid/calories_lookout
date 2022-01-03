@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_breakfastFragment2_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_breakfastFragment2_to_calculatorFragment"
+            app:destination="@id/calculatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/breakfastDescriptionFragment2"
@@ -48,5 +51,9 @@
             android:id="@+id/action_favoriteFragment_to_breakfastFragment2"
             app:destination="@id/breakfastFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/calculatorFragment"
+        android:name="com.calories.calorieslookout.CalculatorFragment"
+        android:label="CalculatorFragment" />
 
 </navigation>

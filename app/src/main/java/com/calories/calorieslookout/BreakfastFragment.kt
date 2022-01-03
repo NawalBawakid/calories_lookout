@@ -141,12 +141,12 @@ class BreakfastFragment : Fragment() {
                 return true
             }
 
-            R.id.calculation -> {
-                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
-                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-                this?.startActivity(intent)
-                return true
-            }
+//            R.id.calculation -> {
+//                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
+//                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+//                this?.startActivity(intent)
+//                return true
+//            }
 
             R.id.signout -> {
                 FirebaseAuth.getInstance().signOut()
@@ -157,6 +157,13 @@ class BreakfastFragment : Fragment() {
 //                findNavController(R.id.overviewFragment).navigate(action)
                 return true
             }
+
+//            R.id.testFragment -> {
+//                FirebaseAuth.getInstance().signOut()
+//                var action = BreakfastFragmentDirections.actionBreakfastFragment2ToTestFragment()
+//                findNavController().navigate(action)
+//                return true
+//            }
 
             else -> {
                 Log.e("test", "onOptionsItemSelected: else")
