@@ -15,8 +15,8 @@ import java.lang.Exception
 import java.lang.StringBuilder
 import java.util.logging.Logger
 import android.database.sqlite.SQLiteDatabase
-
-
+import android.text.TextUtils
+import com.google.firebase.auth.FirebaseAuth
 
 
 enum class CaloriesApiStatus{LOADING, ERROR, DONE}
@@ -37,11 +37,17 @@ class OverviewViewModel : ViewModel(){
     private val _title = MutableLiveData<String>()
     val title: LiveData<String> = _title
 
+    private val _isFav = MutableLiveData<String>()
+    val isFav: LiveData<String> = _isFav
+
     private val _descriptions = MutableLiveData<String>()
     val descriptions: LiveData<String> = _descriptions
 
     private val _calories = MutableLiveData<String>()
     val calories: LiveData<String> = _calories
+
+    private val _ingredient = MutableLiveData<String>()
+    val ingredient: LiveData<String> = _ingredient
 
     private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
 
@@ -97,6 +103,7 @@ class OverviewViewModel : ViewModel(){
         _title.value = item?.recipe?.label
         _descriptions.value = item?.recipe?.url
         _calories.value = item?.recipe?.getCaloriesAsString()
+        _ingredient.value = item?.recipe?.ingredientLines.toString()
     }
 
 
@@ -125,13 +132,14 @@ class OverviewViewModel : ViewModel(){
         _calories.value = item?.recipe?.getCaloriesAsString()
         _foodId.value = item?.recipe?.source
 
-//, item?.recipe?.source, userID
-        return CaloriesData(item?.recipe?.image,item?.recipe?.label,item?.recipe?.getCalories(), item?.recipe?.source, userID)
+        return CaloriesData(item?.recipe?.image,item?.recipe?.label,item?.recipe?.getCalories(), item?.recipe?.source, userID, item?.recipe?.ingredientLines)
     }
 
 
     fun addtoFirebase(itemFavorate : CaloriesData){
-        CaloriesDataCollection.add(itemFavorate).addOnCompleteListener{task ->
+        var userId=FirebaseAuth.getInstance().currentUser?.uid?:""
+        CaloriesDataCollection.document("users").collection(userId).add(itemFavorate)
+            .addOnCompleteListener{task ->
             if (task.isSuccessful){
                // val document = task.result
 //                Toast.makeText(this.requireContext(), "Added to fov", Toast.LENGTH_SHORT).show()
@@ -141,7 +149,8 @@ class OverviewViewModel : ViewModel(){
 
 
     fun retriveData(){
-        CaloriesDataCollection.get().addOnCompleteListener{task ->
+        var userId=FirebaseAuth.getInstance().currentUser?.uid?:""
+        CaloriesDataCollection.document("users").collection(userId).get().addOnCompleteListener{task ->
             if (task.isSuccessful) {
                 val item = mutableListOf<CaloriesData>()
                 for (data in task.result!!.documents) {
@@ -159,17 +168,20 @@ class OverviewViewModel : ViewModel(){
         }
     }
 
-    fun favoriteCheck(index: Int){
-        var item = _infoItem.value?.get(index)
-        
-//        if (item.recipe.source == retriveData()){
-//
-//        }
+
+    fun isFavorit(label: String):Boolean{
+       var isFave= _likeItem.value?.find { it?.label == label }
+        Log.d("TAG", "favoriteCheck: $isFave ")
+        isFave?.let {
+         return true
+        }
+        return false
     }
 
 
     fun removeData(itemFavorate : CaloriesData){
-        CaloriesDataCollection.whereEqualTo("image", itemFavorate.image)
+        var userId=FirebaseAuth.getInstance().currentUser?.uid?:""
+        CaloriesDataCollection.document("users").collection(userId).whereEqualTo("image", itemFavorate.image)
             .whereEqualTo("label", itemFavorate.label)
             .whereEqualTo("calories", itemFavorate.calories)
             .get()
@@ -177,7 +189,8 @@ class OverviewViewModel : ViewModel(){
                 if (task.isSuccessful){
                     if (task.result!!.documents.isNotEmpty()){
                         for (data in task.result!!.documents){
-                            CaloriesDataCollection.document(data.id).delete()
+                            CaloriesDataCollection.document("users").collection(userId).document(data.id).delete()
+                            retriveData()
                         }
                     }else{
 
@@ -185,8 +198,13 @@ class OverviewViewModel : ViewModel(){
                 }
 
             }
+
     }
 
 
+//    for (data in task.result!!.documents) {
+//        val calories = data.toObject<CaloriesData>()
+//        item.document(data.id).delete(calories!!)
+//    }
 
 }

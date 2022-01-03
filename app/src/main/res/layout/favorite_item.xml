@@ -7,6 +7,10 @@
         <variable
             name="item"
             type="com.calories.calorieslookout.database.CaloriesData" />
+
+        <variable
+            name="mealViewModel"
+            type="com.calories.calorieslookout.viewModel.OverviewViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,38 +32,17 @@
             app:imageUrl="@{item.image}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <ImageView
-            android:id="@+id/disLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40sp"
-            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/title"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageView
-            android:id="@+id/like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40sp"
-            app:srcCompat="@drawable/ic_baseline_favorite_24"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/title"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#0F2467"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:paddingTop="5dp"
-            android:paddingStart="10dp"
             android:layout_marginEnd="20sp"
             android:layout_marginTop="50dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="9dp"
             app:layout_constraintStart_toEndOf="@id/poster_image"
             app:layout_constraintTop_toTopOf="parent"
             app:textset="@{item.label}" />
@@ -70,15 +53,33 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="#0A1A50"
             android:paddingTop="5dp"
-            android:paddingStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="9dp"
             android:text="@{String.valueOf(item.calories)}"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <ImageView
+            android:id="@+id/disLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40sp"
+            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/caloriesnum"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40sp"
+            app:srcCompat="@drawable/ic_baseline_favorite_24"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/caloriesnum"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

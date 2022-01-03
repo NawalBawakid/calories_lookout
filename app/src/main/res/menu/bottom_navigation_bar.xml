@@ -12,4 +12,9 @@
         android:title="Favorite"
         android:icon="@drawable/favorite"/>
 
+    <item
+        android:id="@+id/calculatorFragment"
+        android:title="calculator"
+        android:icon="@drawable/ic_baseline_calculate_24"/>
+
 </menu>

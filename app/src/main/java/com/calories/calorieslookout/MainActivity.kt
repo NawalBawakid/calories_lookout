@@ -86,12 +86,12 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
 
-            R.id.calculation -> {
-                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
-                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-                this?.startActivity(intent)
-                return true
-            }
+//            R.id.calculation -> {
+//                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
+//                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+//                this?.startActivity(intent)
+//                return true
+//            }
 
             R.id.signout -> {
                 FirebaseAuth.getInstance().signOut()

@@ -1,23 +1,19 @@
 package com.calories.calorieslookout
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.calories.calorieslookout.adapter.FavoriteAdapter
-import com.calories.calorieslookout.adapter.GridAdapter
+import com.calories.calorieslookout.database.CaloriesData
 
-import com.calories.calorieslookout.databinding.FavoriteItemBinding
-import com.calories.calorieslookout.databinding.FragmentBreakfastBinding
 import com.calories.calorieslookout.databinding.FragmentFavoriteBinding
-import com.calories.calorieslookout.databinding.GridItemBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
-import java.lang.StringBuilder
 
 
 class FavoriteFragment : Fragment() {
@@ -43,7 +39,10 @@ class FavoriteFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.overViewModel = viewModel
-        binding.favoriteItem.adapter = FavoriteAdapter()
+        binding.favoriteItem.adapter = FavoriteAdapter { viewModel.removeData(it)
+
+//            getFragmentManager()?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+        }
 
         return binding.root
     }
@@ -56,6 +55,8 @@ class FavoriteFragment : Fragment() {
 //        })
 
        viewModel.retriveData()
+//        getFragmentManager()?.beginTransaction()?.detach(this)?.attach(this)?.commit()
+
 
 
     }

@@ -1,6 +1,5 @@
 package com.calories.calorieslookout
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.calories.calorieslookout.database.CaloriesData
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
 import com.google.firebase.auth.FirebaseAuth
-
 
 
 class BreakfastDescriptionFragment : Fragment() {
@@ -23,11 +22,9 @@ class BreakfastDescriptionFragment : Fragment() {
 //    }
 
     private var _binding: FragmentBreakfastDescriptionBinding? = null
-    private lateinit var binding:FragmentBreakfastDescriptionBinding
+    private lateinit var binding: FragmentBreakfastDescriptionBinding
 
     private val viewModel: OverviewViewModel by activityViewModels()
-
-    private var isFavorite = true
 
 
     var index = 0
@@ -47,7 +44,7 @@ class BreakfastDescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBreakfastDescriptionBinding.inflate(inflater)
-        binding=_binding!!
+        binding = _binding!!
 
         binding = FragmentBreakfastDescriptionBinding.inflate(inflater, container, false)
 
@@ -76,47 +73,33 @@ class BreakfastDescriptionFragment : Fragment() {
             }
         }
 
-        binding.disLike.setOnClickListener {
-
-            if (isFavorite) {
-
-                binding.like.visibility = View.VISIBLE
-                isFavorite = false
-                binding.like.visibility = View.VISIBLE
-                binding.disLike.visibility = View.GONE
-
-                // isFavorite = !isFavorite
-                val prefrence = context?.getSharedPreferences("inventry", Context.MODE_PRIVATE)
-                var getKey = prefrence?.getString("id", "0")
-
-                val displyData = viewModel.favorite(index,getKey!!)
-                viewModel.addtoFirebase(displyData)
+//        binding.like.isClickable = isVisible
+//        binding.disLike.isClickable = isVisible
 
 
+//        viewModel.isFav.observe(this.viewLifecycleOwner,{
+//        })
+//
+//        binding.like.setOnFocusChangeListener {buttonView , isFavorite ->
+//
+//            CaloriesData[item].Checked = isChecked
+//
+//        }
 
+        binding.like.setOnClickListener {
 
-            } else {
-                isFavorite = true
-                binding.disLike.visibility = View.VISIBLE
-                binding.like.visibility = View.GONE
+            val displyData = viewModel.favorite(index, "")
+            if (displyData.label?.let { it1 -> viewModel.isFavorit(label = it1) } == false) {
+
+                    binding.like.setImageResource(R.drawable.ic_baseline_favorite_24)
+                    binding.like.visibility = View.VISIBLE
+
+                    viewModel.addtoFirebase(displyData)
             }
-        }
-
-        binding.like.setOnClickListener{
-            if(isFavorite){
+            else {
                 binding.like.visibility = View.VISIBLE
-                isFavorite = false
-                binding.like.visibility = View.VISIBLE
-                binding.disLike.visibility = View.GONE
+                viewModel.removeData(displyData)
 
-                val displyData = viewModel.favorite(index,"")
-                viewModel.addtoFirebase(displyData)
-               // viewModel.removeData(displyData)
-
-            }else{
-                isFavorite = true
-                binding.disLike.visibility = View.VISIBLE
-                binding.like.visibility = View.GONE
             }
         }
 
@@ -134,35 +117,39 @@ class BreakfastDescriptionFragment : Fragment() {
             R.id.breakfast -> {
                 Log.e("test", "onOptionsItemSelected: breakfast")
                 viewModel.getMealsPhotos("breakfast")
-                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
+                var action =
+                    BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
                 findNavController().navigate(action)
                 return true
             }
 
             R.id.lunch -> {
                 viewModel.getMealsPhotos("lunch")
-                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
+                var action =
+                    BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
                 findNavController().navigate(action)
                 return true
             }
 
             R.id.dinner -> {
                 viewModel.getMealsPhotos("dinner")
-                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
+                var action =
+                    BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
                 findNavController().navigate(action)
                 return true
             }
 
-            R.id.calculation -> {
-                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
-                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-                this?.startActivity(intent)
-                return true
-            }
+//            R.id.calculation -> {
+//                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
+//                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+//                this?.startActivity(intent)
+//                return true
+//            }
 
             R.id.signout -> {
                 FirebaseAuth.getInstance().signOut()
-                var action = BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToLoginFragment()
+                var action =
+                    BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToLoginFragment()
                 findNavController().navigate(action)
 
 //                var action = BreakfastFragmentDirections.actionBreakfastFragmentToNavGraph2()
