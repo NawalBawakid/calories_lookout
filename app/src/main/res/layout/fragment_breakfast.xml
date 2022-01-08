@@ -65,6 +65,7 @@ tools:context="com.example.moviesapplication.overview.OverviewFragment">
         app:layout_constraintTop_toTopOf="parent"
         app:calorieApiStatus="@{OverViewModel.status}" />
 
+
 <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
 <!--        android:id="@+id/bottomnav"-->
 <!--        android:layout_width="match_parent"-->

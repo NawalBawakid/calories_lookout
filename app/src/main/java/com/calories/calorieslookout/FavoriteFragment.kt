@@ -61,6 +61,12 @@ class FavoriteFragment : Fragment() {
 
     }
 
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.retriveData()
+//        binding.favoriteItem.adapter = FavoriteAdapter{ viewModel.removeData(it)}
+//    }
+
 
 
 }

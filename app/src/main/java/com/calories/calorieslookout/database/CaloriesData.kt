@@ -25,6 +25,8 @@ data class CaloriesData (
 
         @Json(name="isFav")
         val isFav:Boolean = false
-    )
+    ){
+        fun getCaloriesAsString():String = calories?.roundToInt()?.toString()?:""
+}
 
 

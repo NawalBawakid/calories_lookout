@@ -46,6 +46,15 @@ class OverviewViewModel : ViewModel(){
     private val _calories = MutableLiveData<String>()
     val calories: LiveData<String> = _calories
 
+    private var _weights = MutableLiveData<Double>()
+    val weights: LiveData<Double> = _weights
+
+        private val _heights = MutableLiveData<Int>()
+    val heights: LiveData<Int> = _heights
+
+    private val _ages = MutableLiveData<Int>()
+    val ages: LiveData<Int> = _ages
+
     private val _ingredient = MutableLiveData<String>()
     val ingredient: LiveData<String> = _ingredient
 
@@ -53,6 +62,12 @@ class OverviewViewModel : ViewModel(){
 
     private val _caloriesNum = MutableLiveData<Double>()
     val caloriesNum: LiveData<Double> = _caloriesNum
+
+    var userNames =FirebaseAuth.getInstance().currentUser?.displayName
+
+    var userEmail =FirebaseAuth.getInstance().currentUser?.email
+
+    var userImage =FirebaseAuth.getInstance().currentUser?.photoUrl
 
     private val _foodId = MutableLiveData<String>()
     val foodId: LiveData<String> = _foodId
@@ -96,7 +111,39 @@ class OverviewViewModel : ViewModel(){
         }
     }
 
-    fun informationll(index: Int) {
+    fun maleCalories(weights: Double, heights: Double, ages: Double): Double {
+
+
+       // _weights = weights
+
+       return ((10 * weights) + (6.25 * heights) - (5 * ages) + 5)
+    }
+
+    fun femaleCalories(weights: Double, heights: Double, ages: Double): Double {
+        return ((10 * weights) + (6.25 * heights) - (5 * ages) - 161)
+    }
+
+    fun informationll(index: Int , favorite : Int = 0) {
+        if (favorite == 1){
+            favMealsList(index)
+            retriveData()
+        }else{
+            detailsMealsList(index)
+            retriveData()
+        }
+
+    }
+
+
+    fun favMealsList(index: Int){
+        var item = _likeItem.value?.get(index)
+        _photos.value = item?.image
+        _title.value = item?.label
+        _calories.value = item?.getCaloriesAsString()
+        _ingredient.value = item?.ingredientLines.toString()
+    }
+
+    fun detailsMealsList(index: Int){
         var item = _infoItem.value?.get(index)
 
         _photos.value = item?.recipe?.image
@@ -196,15 +243,8 @@ class OverviewViewModel : ViewModel(){
 
                     }
                 }
-
             }
-
     }
 
-
-//    for (data in task.result!!.documents) {
-//        val calories = data.toObject<CaloriesData>()
-//        item.document(data.id).delete(calories!!)
-//    }
 
 }

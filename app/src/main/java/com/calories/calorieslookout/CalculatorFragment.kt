@@ -10,14 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
 import com.calories.calorieslookout.databinding.FragmentCalculatorBinding
+import com.calories.calorieslookout.viewModel.OverviewViewModel
 import kotlin.math.roundToInt
 
 class CalculatorFragment : Fragment() {
 
     private var _binding: FragmentCalculatorBinding? = null
     private lateinit var binding: FragmentCalculatorBinding
+
+    private val viewModel: OverviewViewModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,25 +54,53 @@ class CalculatorFragment : Fragment() {
             var height = binding.height.text
             var age = binding.age.text
 
-            if (TextUtils.isEmpty(weight.toString()) || TextUtils.isEmpty(height.toString()) || TextUtils.isEmpty(age.toString()) ){
-                binding.amount.setText("Fill The Blank Line")
-            }else{
-                var weights = binding.weight.text.toString().toDouble()
-                var heights = binding.height.text.toString().toDouble()
-                var ages = binding.age.text.toString().toDouble()
+            if (!(TextUtils.isEmpty(weight.toString()))){
+                if (!(TextUtils.isEmpty(height.toString()))){
+                    if (!(TextUtils.isEmpty(age.toString()))){
+                        var weights = binding.weight.text.toString().toDouble()
+                        var heights = binding.height.text.toString().toDouble()
+                        var ages = binding.age.text.toString().toDouble()
 
-                var chooseButton = binding.chooseButton.checkedRadioButtonId
+                        var chooseButton = binding.chooseButton.checkedRadioButtonId
 
-                var maleCalories = ((10*weights) + (6.25*heights) - (5*ages) + 5)
+                        // var maleCalories = ((10*weights) + (6.25*heights) - (5*ages) + 5)
 
-                var femaleCalories = ((10*weights) + (6.25*heights) - (5*ages) - 161)
+                        // var femaleCalories = ((10*weights) + (6.25*heights) - (5*ages) - 161)
 
-                var total = when(chooseButton){
-                    binding.male.id -> maleCalories
-                    else -> femaleCalories
+                        var total = when(chooseButton){
+                            binding.male.id -> viewModel.maleCalories(weights, heights, ages)
+                            else -> viewModel.femaleCalories(weights, heights, ages)
+                        }
+                        binding.amount.setText("You need: $total Calories per day")
+                    } else{
+                        binding.age.setError("Required")
+                        binding.amount.setText(" ")
+                    }
+                }else {
+                    binding.height.setError("Required")
+                    binding.amount.setText(" ")
                 }
-                binding.amount.setText("You need: $total Calories per day")
+            }else{
+                binding.weight.setError("Required")
+                binding.amount.setText(" ")
             }
+//            else{
+//                var weights = binding.weight.text.toString().toDouble()
+//                var heights = binding.height.text.toString().toDouble()
+//                var ages = binding.age.text.toString().toDouble()
+//
+//                var chooseButton = binding.chooseButton.checkedRadioButtonId
+//
+//                var maleCalories = ((10*weights) + (6.25*heights) - (5*ages) + 5)
+//
+//                var femaleCalories = ((10*weights) + (6.25*heights) - (5*ages) - 161)
+//
+//                var total = when(chooseButton){
+//                    binding.male.id -> maleCalories
+//                    else -> femaleCalories
+//                }
+//                binding.amount.setText("You need: $total Calories per day")
+//            }
 
 
             //   binding.amount.setText("You need: $x Calories per day")
