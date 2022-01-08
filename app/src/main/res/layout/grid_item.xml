@@ -13,13 +13,10 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
+        android:layout_width="2000dp"
         android:layout_height="wrap_content"
-        app:cardElevation="40sp"
         app:cardCornerRadius="20sp"
-        android:padding="30dp"
-        android:layout_margin="40dp"
-        android:backgroundTint="#E9FDFCFC">
+        app:cardUseCompatPadding="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +25,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         app:cardCornerRadius="20sp"
-        android:background="#E9FDFCFC">
+        android:background="#92E4E1E1">
 
         <ImageView
             android:id="@+id/poster_image"
@@ -75,7 +72,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:paddingTop="5dp"
-            android:text="@{String.valueOf(item.recipe.calories)}"
+            android:text="@{String.valueOf(item.recipe.getCaloriesAsString)}"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@id/calories"
             app:layout_constraintTop_toBottomOf="@id/title" />

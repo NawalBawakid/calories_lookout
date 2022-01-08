@@ -1,29 +1,31 @@
 package com.calories.calorieslookout
 
+import android.app.PendingIntent.getActivity
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.calories.calorieslookout.databinding.ActivityLoginBinding
 import android.preference.PreferenceManager
-
-import android.content.SharedPreferences
-import androidx.core.app.ActivityCompat.startActivityForResult
-
-import android.content.Intent
+import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
+
+import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityLoginBinding
+    lateinit var bottomNavigation:BottomNavigationView
 
    // private val favoratFragment = FavoriteFragment()
 
@@ -31,13 +33,24 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 //      setContentView(R.layout.activity_login)
 
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
+        // animation
+        val animation = AnimationUtils.loadAnimation(this, R.anim.top_to_buttom_nimation)
+        val logo = findViewById<ImageView>(R.id.logo)
+        val appName = findViewById<TextView>(R.id.calories)
+        val registration = findViewById<Button>(R.id.signin)
+
+        logo.startAnimation(animation)
+        appName.startAnimation(animation)
+        registration.startAnimation(animation)
+
+
+
         // Bottom Navigation
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomnav)
+         bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomnav)
         val navController = findNavController(R.id.nav_host_fragment_content_login)
 
         bottomNavigation.setupWithNavController(navController)
@@ -58,15 +71,26 @@ class LoginActivity : AppCompatActivity() {
 //        }
 
 
-        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        val Islogin = prefs.getBoolean("Islogin", false)
-        prefs.edit().putBoolean("Islogin", Islogin).commit()
+//        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+//        val Islogin = prefs.getBoolean("Islogin", false)
+//        prefs.edit().putBoolean("Islogin", Islogin).commit()
+//
+//        if (Islogin) {
+//
+//        } else {
+//
+//        }
 
-        if (Islogin) {
 
-        } else {
+//        var userId= FirebaseAuth.getInstance().currentUser?.uid?:""
+//        if(userId == null){
+//            val intent = Intent (getActivity(), LoginActivity::class.java)
+//                getActivity()?.startActivity(intent)
+//            }else{
+//                val intent = Intent (getActivity(), BreakfastFragment::class.java)
+//                getActivity()?.startActivity(intent)
+//            }
 
-        }
 
 
 

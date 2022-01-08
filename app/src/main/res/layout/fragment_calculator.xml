@@ -30,52 +30,81 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calories_logo" />
+            app:srcCompat="@drawable/calorieslogo" />
 
-        <EditText
-            android:id="@+id/weight"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/weight_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:hint="Weight"
-            android:textSize="20sp"
-            android:layout_marginEnd="10sp"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="20sp"
-            android:inputType="number"
-            android:digits="0123456789."
+            style="@style/Widget.Unscramble.TextInputLayout.OutlinedBox"
             app:layout_constraintStart_toStartOf="@id/logo"
             app:layout_constraintEnd_toEndOf="@id/logo"
-            app:layout_constraintTop_toBottomOf="@id/logo"/>
+            app:layout_constraintTop_toBottomOf="@id/logo">
 
-        <EditText
-            android:id="@+id/height"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/weight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="20sp"
+                android:inputType="number"
+                android:digits="0123456789."
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/height_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Height"
-            android:textSize="20sp"
-            android:layout_marginEnd="10sp"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="20sp"
-            android:inputType="number"
-            android:digits="0123456789."
-            app:layout_constraintStart_toStartOf="@id/weight"
-            app:layout_constraintEnd_toEndOf="@id/weight"
-            app:layout_constraintTop_toBottomOf="@id/weight" />
+            android:layout_marginTop="8dp"
+            android:hint="height"
+            style="@style/Widget.Unscramble.TextInputLayout.OutlinedBox"
+            app:layout_constraintStart_toStartOf="@id/weight_label"
+            app:layout_constraintEnd_toEndOf="@id/weight_label"
+            app:layout_constraintTop_toBottomOf="@id/weight_label">
 
-        <EditText
-            android:id="@+id/age"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/height"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="20sp"
+                android:inputType="number"
+                android:digits="0123456789."
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/age_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Age"
-            android:textSize="20sp"
-            android:inputType="number"
-            android:digits="0123456789."
-            android:layout_marginEnd="10sp"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="20sp"
-            app:layout_constraintStart_toStartOf="@id/weight"
-            app:layout_constraintEnd_toEndOf="@id/weight"
-            app:layout_constraintTop_toBottomOf="@id/height" />
+            android:layout_marginTop="8dp"
+            android:hint="age"
+            style="@style/Widget.Unscramble.TextInputLayout.OutlinedBox"
+            app:layout_constraintStart_toStartOf="@id/weight_label"
+            app:layout_constraintEnd_toEndOf="@id/weight_label"
+            app:layout_constraintTop_toBottomOf="@id/height_label" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="20sp"
+                android:inputType="number"
+                android:digits="0123456789."
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
             android:id="@+id/chooseButton"
@@ -83,9 +112,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:layout_marginStart="30dp"
-            app:layout_constraintEnd_toEndOf="@id/weight"
-            app:layout_constraintStart_toStartOf="@id/weight"
-            app:layout_constraintTop_toBottomOf="@id/age">
+            app:layout_constraintEnd_toEndOf="@id/weight_label"
+            app:layout_constraintStart_toStartOf="@id/weight_label"
+            app:layout_constraintTop_toBottomOf="@id/age_label">
 
         <RadioButton
             android:id="@+id/male"
@@ -111,22 +140,22 @@
             android:textSize="15sp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="15sp"
             android:background="@drawable/round_corner_top"
-            app:layout_constraintStart_toStartOf="@id/weight"
-            app:layout_constraintEnd_toEndOf="@id/weight"
+            app:layout_constraintStart_toStartOf="@id/weight_label"
+            app:layout_constraintEnd_toEndOf="@id/weight_label"
             app:layout_constraintTop_toBottomOf="@id/chooseButton"/>
 
         <TextView
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40sp"
+            android:layout_marginTop="20sp"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/weight"
-            app:layout_constraintStart_toStartOf="@id/weight"
+            app:layout_constraintEnd_toEndOf="@id/weight_label"
+            app:layout_constraintStart_toStartOf="@id/weight_label"
             app:layout_constraintTop_toBottomOf="@id/cacculate" />
 
 <!--        <TextView-->

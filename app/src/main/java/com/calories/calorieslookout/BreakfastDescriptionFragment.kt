@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -26,16 +27,19 @@ class BreakfastDescriptionFragment : Fragment() {
 
     private val viewModel: OverviewViewModel by activityViewModels()
 
+//    lateinit var toggle: ActionBarDrawerToggle
 
     var index = 0
+    var favorite = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-//        getActivity().supportActionBar().hide()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+//        getActivity()?.actionBar?.show()
 
         arguments.let {
             index = it!!.getInt("id")
+            favorite = it!!.getInt("favorite")
         }
     }
 
@@ -64,7 +68,13 @@ class BreakfastDescriptionFragment : Fragment() {
             mealViewModel = viewModel
             detailsBreakfastFragment = this@BreakfastDescriptionFragment
 
-            viewModel.informationll(index)
+
+            if (favorite == 1){
+//                viewModel.favorite(index, "" )
+               viewModel.informationll(index , 1)
+            }else{
+                viewModel.informationll(index)
+            }
 
             recipe.setOnClickListener {
                 val queryUrl: Uri = Uri.parse("${item}")
@@ -102,6 +112,11 @@ class BreakfastDescriptionFragment : Fragment() {
 
             }
         }
+
+
+//        var drawableLayout = binding.drawaleMenu
+//
+//        toggle = ActionBarDrawerToggle(this, drawableLayout, R.string.open, R.string.close)
 
     }
 

@@ -1,34 +1,21 @@
 package com.calories.calorieslookout.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.calories.calorieslookout.FavoriteFragmentDirections
 import com.calories.calorieslookout.database.CaloriesData
 import com.calories.calorieslookout.databinding.FavoriteItemBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import androidx.core.content.ContextCompat.startActivity
 
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.recreate
-import androidx.core.content.ContextCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.calories.calorieslookout.FavoriteFragmentDirections
-import androidx.core.content.ContextCompat.startActivity
-import com.calories.calorieslookout.MainActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.ContextCompat.startActivity
-import com.calories.calorieslookout.FavoriteFragment
-import androidx.core.content.ContextCompat.startActivity
-import android.os.Build
-import androidx.fragment.app.FragmentTransaction
 
 
 class FavoriteAdapter(val removeClickListener: (item:CaloriesData) -> Unit) : ListAdapter<CaloriesData, FavoriteAdapter.ResultsItemViewHolder>(DiffCallback) {
@@ -107,6 +94,11 @@ class FavoriteAdapter(val removeClickListener: (item:CaloriesData) -> Unit) : Li
 //            startActivity(getIntent())
 
 
+        }
+
+        holder.itemOfMeal.setOnClickListener{
+            var action = FavoriteFragmentDirections.actionFavoriteFragmentToBreakfastDescriptionFragment2(id = position, favorite = 1)
+            holder.itemOfMeal.findNavController().navigate(action)
         }
 //        holder.itemOfMeal.setOnClickListener {
 //            var action = BreakfastFragmentDirections.actionBreakfastFragment2ToBreakfastDescriptionFragment2(id = position)

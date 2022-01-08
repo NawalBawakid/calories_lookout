@@ -45,7 +45,7 @@ class GridAdapter :
 
         holder.bind(listMeal)
         holder.itemOfMeal.setOnClickListener {
-            var action = BreakfastFragmentDirections.actionBreakfastFragment2ToBreakfastDescriptionFragment2(id = position)
+            var action = BreakfastFragmentDirections.actionBreakfastFragment2ToBreakfastDescriptionFragment2(id = position, favorite = 0)
             holder.itemOfMeal.findNavController().navigate(action)
 
         }

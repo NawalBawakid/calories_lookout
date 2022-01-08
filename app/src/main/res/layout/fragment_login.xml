@@ -6,39 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <View-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="550dp"-->
-<!--        android:background="@drawable/round_courner_bottom"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+    <!--    <View-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="550dp"-->
+    <!--        android:background="@drawable/round_courner_bottom"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/welcome"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="20sp"-->
-<!--        android:layout_marginTop="80sp"-->
-<!--        android:text="Welcome To"-->
-<!--        android:textColor="#0F2467"-->
-<!--        android:textSize="36dp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/welcome"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="20sp"-->
+    <!--        android:layout_marginTop="80sp"-->
+    <!--        android:text="Welcome To"-->
+    <!--        android:textColor="#0F2467"-->
+    <!--        android:textSize="36dp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:id="@+id/animationView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="300sp"-->
-<!--        app:lottie_autoPlay="true"-->
-<!--        app:lottie_loop="true"-->
-<!--        app:lottie_rawRes="@raw/avocado"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/signin"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/calories"/>-->
+    <!--    <com.airbnb.lottie.LottieAnimationView-->
+    <!--        android:id="@+id/animationView"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="300sp"-->
+    <!--        app:lottie_autoPlay="true"-->
+    <!--        app:lottie_loop="true"-->
+    <!--        app:lottie_rawRes="@raw/avocado"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/signin"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/calories"/>-->
 
     <ImageView
         android:id="@+id/logo"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.394"
-        app:srcCompat="@drawable/calories_logo" />
+        app:srcCompat="@drawable/calorieslogo" />
 
     <TextView
         android:id="@+id/calories"
@@ -60,9 +60,9 @@
         android:textColor="#006064"
         android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <Button
         android:id="@+id/signin"
@@ -80,16 +80,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <!--    <TextView-->
-<!--        android:id="@+id/move"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Click to move"-->
-<!--        android:textColor="#484A4E"-->
-<!--        android:textSize="20dp"-->
-<!--        app:layout_constraintStart_toStartOf="@id/signin"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/signin"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/signin"/>-->
-
+    <!--        android:id="@+id/move"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Click to move"-->
+    <!--        android:textColor="#484A4E"-->
+    <!--        android:textSize="20dp"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/signin"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/signin"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/signin"/>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

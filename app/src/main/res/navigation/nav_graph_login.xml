@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_breakfastFragment2_to_calculatorFragment"
             app:destination="@id/calculatorFragment" />
+        <action
+            android:id="@+id/action_breakfastFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/breakfastDescriptionFragment2"
@@ -42,6 +45,9 @@
         <action
             android:id="@+id/action_breakfastDescriptionFragment2_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <argument
+            android:name="favorite"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -50,10 +56,17 @@
         <action
             android:id="@+id/action_favoriteFragment_to_breakfastFragment2"
             app:destination="@id/breakfastFragment2" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_breakfastDescriptionFragment2"
+            app:destination="@id/breakfastDescriptionFragment2" />
     </fragment>
     <fragment
         android:id="@+id/calculatorFragment"
         android:name="com.calories.calorieslookout.CalculatorFragment"
         android:label="CalculatorFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.calories.calorieslookout.ProfileFragment"
+        android:label="ProfileFragment" />
 
 </navigation>

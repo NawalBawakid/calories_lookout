@@ -19,10 +19,16 @@
             type="com.calories.calorieslookout.BreakfastDescriptionFragment" />
     </data>
 
+<!--    <androidx.drawerlayout.widget.DrawerLayout-->
+<!--        android:id="@+id/drawaleMenu"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,6 +40,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:elevation="4dp"
+                app:title="Detail"
+                app:titleTextColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +52,8 @@
                 android:layout_width="370dp"
                 android:layout_height="600dp"
                 android:layout_marginTop="95dp"
-                android:backgroundTint="#E9FDFCFC"
                 app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,14 +92,25 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/caloriesTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="10sp"
+                            android:textStyle="bold"
+                            android:text="Calories: "
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="@id/title"
+                            app:layout_constraintTop_toBottomOf="@id/title" />
+
+                        <TextView
                             android:id="@+id/calories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="Calories"
-                            android:textSize="20sp"
+                            android:textSize="15sp"
                             android:layout_marginTop="10sp"
                             app:textset="@{mealViewModel.calories.toString()}"
-                            app:layout_constraintStart_toStartOf="@+id/title"
+                            app:layout_constraintStart_toEndOf="@+id/caloriesTitle"
                             app:layout_constraintTop_toBottomOf="@id/title" />
 
                         <ImageView
@@ -136,12 +155,24 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--                    <com.google.android.material.navigation.NavigationView-->
+<!--                        android:id="@+id/nav_view"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        app:headerLayout="@layout/nav_header"-->
+<!--                        app:menu="@menu/menu"-->
+<!--                        android:layout_gravity="start"-->
+<!--                        android:fitsSystemWindows="true"/>-->
+
 
                 </ScrollView>
             </androidx.cardview.widget.CardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
+<!--    </androidx.drawerlayout.widget.DrawerLayout>-->
 
 </layout>

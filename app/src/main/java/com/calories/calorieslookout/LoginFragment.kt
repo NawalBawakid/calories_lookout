@@ -3,6 +3,7 @@ package com.calories.calorieslookout
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,6 +56,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
+
         binding.signin.setOnClickListener{
             signInLauncher.launch(signInIntent)
 //            if(signInLauncher == ){
@@ -80,6 +85,13 @@ class LoginFragment : Fragment() {
         //  return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        (requireActivity() as LoginActivity).bottomNavigation.visibility = View.GONE
+
+    }
+
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
@@ -92,14 +104,6 @@ class LoginFragment : Fragment() {
             editor?.putString("id", user?.uid)
             editor?.commit()
 
-
-
-//            user.let {
-//                val id = user?.uid
-//            }
-
-
-            //Toast.makeText(requireContext(), "${user?.uid}", Toast.LENGTH_SHORT).show()
             var action = LoginFragmentDirections.actionLoginFragmentToBreakfastFragment2()
             binding.signin.findNavController().navigate(action)
         } else {

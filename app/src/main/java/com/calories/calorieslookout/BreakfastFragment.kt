@@ -49,6 +49,10 @@ class BreakfastFragment : Fragment() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as LoginActivity).bottomNavigation.visibility = View.VISIBLE
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

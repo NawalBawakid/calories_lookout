@@ -3,10 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable-v24/round_corner_top.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable-v24/round_courner_bottom.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/favorite.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_baseline_calculate_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_baseline_where_to_vote_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_connection_error.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/loading_img.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/drawable/search_round_courner.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/font/arbutus_slab.xml" value="0.20989583333333334" />
@@ -21,9 +29,13 @@
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/fragment_favorite.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/fragment_first.xml" value="0.1796875" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/fragment_login.xml" value="0.1796875" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/fragment_second.xml" value="0.1796875" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/fragment_test.xml" value="0.165625" />
-        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/grid_item.xml" value="0.22" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/grid_item.xml" value="0.1823734729493892" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/nav_header.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/notification.xml" value="0.1766304347826087" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/splash_screen.xml" value="0.16621376811594202" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/layout/test.xml" value="0.1796875" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/menu/bottom_navigation_bar.xml" value="0.1796875" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/CaloriesLookout/app/src/main/res/menu/menu.xml" value="0.1796875" />
