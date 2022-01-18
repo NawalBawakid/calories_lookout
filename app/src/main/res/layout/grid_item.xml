@@ -15,7 +15,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="2000dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20sp"
+        app:cardCornerRadius="10sp"
         app:cardUseCompatPadding="true">
 
 
@@ -24,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:cardCornerRadius="20sp"
-        android:background="#92E4E1E1">
+        style="@style/card">
 
         <ImageView
             android:id="@+id/poster_image"
@@ -42,7 +41,6 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:paddingTop="5dp"
@@ -50,7 +48,8 @@
             android:layout_marginEnd="20sp"
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/poster_image"
-            app:textset="@{item.recipe.label}" />
+            app:textset="@{item.recipe.label}"
+            style="@style/title"/>
 
         <TextView
             android:id="@+id/calories"
@@ -62,6 +61,7 @@
             android:textStyle="bold"
             android:text="Calories: "
             android:textSize="15sp"
+            style="@style/text"
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/title" />
 

@@ -33,7 +33,7 @@ class FavoriteAdapter(val removeClickListener: (item:CaloriesData) -> Unit) : Li
         }
 
         var favoriteButton: ImageView = binding.like
-        var disLikeButton: ImageView = binding.disLike
+       // var disLikeButton: ImageView = binding.disLike
         var image: ImageView = binding.posterImage
         var label: TextView = binding.title
         var calories: TextView = binding.caloriesnum

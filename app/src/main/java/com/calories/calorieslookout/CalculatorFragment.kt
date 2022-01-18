@@ -3,19 +3,13 @@ package com.calories.calorieslookout
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
 import com.calories.calorieslookout.databinding.FragmentCalculatorBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
-import kotlin.math.roundToInt
 
 class CalculatorFragment : Fragment() {
 
@@ -52,20 +46,35 @@ class CalculatorFragment : Fragment() {
         binding.cacculate.setOnClickListener{
             var weight = binding.weight.text
             var height = binding.height.text
-            var age = binding.age.text
+            var age =  binding.age.text
 
             if (!(TextUtils.isEmpty(weight.toString()))){
                 if (!(TextUtils.isEmpty(height.toString()))){
                     if (!(TextUtils.isEmpty(age.toString()))){
+//                        viewModel.weights.observe(viewLifecycleOwner,{
+//                            binding.weight.text.toString().toDouble()
+//                        })
+//
+//                        viewModel.heights.observe(viewLifecycleOwner,{
+//                            binding.height.text.toString().toDouble()
+//                        })
+//
+//                        viewModel.ages.observe(viewLifecycleOwner,{
+//                            binding.age.text.toString().toDouble()
+//                        })
+
                         var weights = binding.weight.text.toString().toDouble()
-                        var heights = binding.height.text.toString().toDouble()
-                        var ages = binding.age.text.toString().toDouble()
+                        var heights = binding.height.text.toString().toInt()
+                        var ages = binding.age.text.toString().toInt()
+//                        var amounts = viewModel.totalAmount
 
                         var chooseButton = binding.chooseButton.checkedRadioButtonId
 
                         // var maleCalories = ((10*weights) + (6.25*heights) - (5*ages) + 5)
 
                         // var femaleCalories = ((10*weights) + (6.25*heights) - (5*ages) - 161)
+
+                       // var total = viewModel.totalAmount
 
                         var total = when(chooseButton){
                             binding.male.id -> viewModel.maleCalories(weights, heights, ages)

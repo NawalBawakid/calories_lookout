@@ -519,7 +519,10 @@ data class Recipe(
     val totalDaily: TotalDaily? = null,
 
     @Json(name="ingredientLines")
-    val ingredientLines: List<String?>? = null
+    val ingredientLines: List<String?>? = null,
+
+    @Json(name="isFav")
+    val isFav:Boolean? = null
 ){
     fun getCaloriesAsString():String = calories?.roundToInt()?.toString()?:""
     fun getCalories():Double = calories?:0.0

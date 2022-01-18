@@ -13,18 +13,25 @@
             type="com.calories.calorieslookout.viewModel.OverviewViewModel"/>
     </data>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10sp"
+        style="@style/card">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favoriteItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:paddingBottom="20sp"
+        android:layout_height="match_parent"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/poster_image"
             android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_height="130dp"
             android:adjustViewBounds="true"
             app:cardCornerRadius="5dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,16 +43,17 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:maxWidth="150dp"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:paddingTop="5dp"
+            android:paddingTop="10dp"
             android:layout_marginEnd="20sp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="15dp"
             android:layout_marginStart="9dp"
             app:layout_constraintStart_toEndOf="@id/poster_image"
             app:layout_constraintTop_toTopOf="parent"
-            app:textset="@{item.label}" />
+            app:textset="@{item.label}"
+            style="@style/title"/>
 
         <TextView
             android:id="@+id/caloriesTitle"
@@ -56,6 +64,7 @@
             android:textStyle="bold"
             android:text="Calories: "
             android:textSize="15sp"
+            style="@style/text"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
@@ -71,26 +80,41 @@
             app:layout_constraintStart_toEndOf="@id/caloriesTitle"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
-        <ImageView
-            android:id="@+id/disLike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40sp"
-            app:srcCompat="@drawable/ic_baseline_favorite_border_24"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@id/caloriesnum"
-            app:layout_constraintEnd_toEndOf="parent"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/disLike"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="40sp"-->
+<!--            app:srcCompat="@drawable/ic_baseline_favorite_border_24"-->
+<!--            android:visibility="invisible"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/caloriesnum"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"/>-->
 
-        <ImageView
+<!--        <ImageView-->
+<!--            android:id="@+id/like"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="40sp"-->
+<!--            app:srcCompat="@drawable/ic_baseline_favorite_24"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/caloriesnum"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"/>-->
+
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40sp"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginTop="10sp"
             app:srcCompat="@drawable/ic_baseline_favorite_24"
             android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@id/caloriesnum"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/likebtn"
+            app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

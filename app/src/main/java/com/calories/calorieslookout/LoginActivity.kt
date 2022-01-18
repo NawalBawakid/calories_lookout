@@ -43,9 +43,9 @@ class LoginActivity : AppCompatActivity() {
         val appName = findViewById<TextView>(R.id.calories)
         val registration = findViewById<Button>(R.id.signin)
 
-        logo.startAnimation(animation)
-        appName.startAnimation(animation)
-        registration.startAnimation(animation)
+//        logo.startAnimation(animation)
+//        appName.startAnimation(animation)
+//        registration.startAnimation(animation)
 
 
 

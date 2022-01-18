@@ -13,6 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="10sp"
+        style="@style/background"
         tools:context="com.example.moviesapplication.overview.OverviewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:favoriteData="@{OverViewModel.likeItem}"
         app:spanCount="1"
+        style="@style/background"
         tools:itemCount="16" />
 
 

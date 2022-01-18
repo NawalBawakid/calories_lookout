@@ -18,29 +18,35 @@ import com.google.firebase.auth.FirebaseAuth
 
 class BreakfastDescriptionFragment : Fragment() {
 
-//    companion object{
-//        const val SEARCH_PREFIX = "https://www.google.com/search?q="
-//    }
-
     private var _binding: FragmentBreakfastDescriptionBinding? = null
     private lateinit var binding: FragmentBreakfastDescriptionBinding
 
     private val viewModel: OverviewViewModel by activityViewModels()
 
-//    lateinit var toggle: ActionBarDrawerToggle
 
     var index = 0
     var favorite = 0
+    var like = false
+    lateinit var userId: String
+    lateinit var itemLables: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-//        getActivity()?.actionBar?.show()
 
         arguments.let {
             index = it!!.getInt("id")
             favorite = it!!.getInt("favorite")
         }
+        userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        itemLables = viewModel.infoItem.value?.get(index)?.recipe?.label.toString()
+
+        like = viewModel.isFav(userId, itemLables)
+        Log.e("TAG", "onCreate: $like")
+
+
+
+
     }
 
     override fun onCreateView(
@@ -61,6 +67,9 @@ class BreakfastDescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        isLike(like)
+
         var item = viewModel.infoItem.value?.get(index)?.recipe?.url
 
         binding.apply {
@@ -69,10 +78,10 @@ class BreakfastDescriptionFragment : Fragment() {
             detailsBreakfastFragment = this@BreakfastDescriptionFragment
 
 
-            if (favorite == 1){
+            if (favorite == 1) {
 //                viewModel.favorite(index, "" )
-               viewModel.informationll(index , 1)
-            }else{
+                viewModel.informationll(index, 1)
+            } else {
                 viewModel.informationll(index)
             }
 
@@ -83,40 +92,34 @@ class BreakfastDescriptionFragment : Fragment() {
             }
         }
 
-//        binding.like.isClickable = isVisible
-//        binding.disLike.isClickable = isVisible
-
-
-//        viewModel.isFav.observe(this.viewLifecycleOwner,{
-//        })
-//
-//        binding.like.setOnFocusChangeListener {buttonView , isFavorite ->
-//
-//            CaloriesData[item].Checked = isChecked
-//
-//        }
 
         binding.like.setOnClickListener {
 
-            val displyData = viewModel.favorite(index, "")
-            if (displyData.label?.let { it1 -> viewModel.isFavorit(label = it1) } == false) {
 
-                    binding.like.setImageResource(R.drawable.ic_baseline_favorite_24)
-                    binding.like.visibility = View.VISIBLE
+            // var favItem = viewModel.likeItem.value?.get(index)?.label
+            // Log.d("TAG", "onViewCreated: $favItem")
 
-                    viewModel.addtoFirebase(displyData)
-            }
-            else {
+            // viewModel.favItem(userId, itemLable)
+
+           viewModel.favItem(userId, itemLables)
+
+
+
+            isLike(like)
+            if (viewModel.isFav("", itemLables) == false) {
+                binding.like.setImageResource(R.drawable.ic_baseline_favorite_24)
                 binding.like.visibility = View.VISIBLE
-                viewModel.removeData(displyData)
+
+
+            } else {
+                binding.like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                binding.like.visibility = View.VISIBLE
+                //viewModel.removeData(displyData)
+             viewModel.unFavItem(userId, itemLables)
 
             }
+
         }
-
-
-//        var drawableLayout = binding.drawaleMenu
-//
-//        toggle = ActionBarDrawerToggle(this, drawableLayout, R.string.open, R.string.close)
 
     }
 
@@ -176,6 +179,19 @@ class BreakfastDescriptionFragment : Fragment() {
                 Log.e("test", "onOptionsItemSelected: else")
                 return super.onOptionsItemSelected(item)
             }
+        }
+    }
+
+
+    fun isLike(fav: Boolean){
+        if (fav) {
+            binding.like.setImageResource(R.drawable.ic_baseline_favorite_24)
+            binding.like.visibility = View.VISIBLE
+
+        } else {
+            binding.like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            binding.like.visibility = View.VISIBLE
+
         }
     }
 

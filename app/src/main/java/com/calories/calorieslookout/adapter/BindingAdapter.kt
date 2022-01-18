@@ -40,6 +40,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<HitsItem?>?) {
     adapter.submitList(data)
 }
 
+
 @BindingAdapter("favoriteData")
 fun bindFavoriteRecyclerView(recyclerView: RecyclerView, data: List<CaloriesData?>?) {
     Log.e("infooo","$data")
