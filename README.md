@@ -1,21 +1,21 @@
 
-### MyCalories 
+## MyCalories 
 
 > ##### The app is targeting people who is doing diet. The concept is giving them a recipe of foods with the number of calories in each recipe so he/she can manage his/her calories per day…
 
 
 
-### API
+## API
 > ##### https://api.edamam.com/search?q=breakfast&app_id=fafcd302&app_key=76b9f87704af9178637d1b74796f09c6
 
 
 
-### Wireframe
+## Wireframe
 > ##### https://whimsical.com/HYRgMNDz6CxeYjupzS42k
 
 
 
-### Features 
+## Features 
 * ##### Sign in with google 
 * ##### Provides a list of meals with menu to choose (Breakfast, Lunch, Dinner) 
 * ##### Provide a screen for the details of the meals including the calories and recipe
@@ -28,7 +28,7 @@
 
 
 
-### Components Used 
+## Components Used 
 * ##### Navigation Graph
 * ##### View Model
 * ##### View Binding & Data Binding
@@ -40,19 +40,19 @@
 
 
 
-### unsolved problems
+## unsolved problems
 * ##### Provide loading icon when uploading profile image
 * ##### Fixing dark mode switch button
 
 
 
-### Favorite Functions
+## Favorite Functions
 > ##### Making a function to make sure if the item already in the favorite list will not add it again to it
 > ##### Making a function to search for item by name 
 
 
 
-### MyCalories UI
+## MyCalories UI
 
 
 
