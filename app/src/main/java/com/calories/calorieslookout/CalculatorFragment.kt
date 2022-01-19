@@ -21,7 +21,6 @@ class CalculatorFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -34,8 +33,6 @@ class CalculatorFragment : Fragment() {
 
         binding = FragmentCalculatorBinding.inflate(inflater, container, false)
 
-//        (context as AppCompatActivity).setSupportActionBar(binding.toolbar)
-//        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -51,30 +48,12 @@ class CalculatorFragment : Fragment() {
             if (!(TextUtils.isEmpty(weight.toString()))){
                 if (!(TextUtils.isEmpty(height.toString()))){
                     if (!(TextUtils.isEmpty(age.toString()))){
-//                        viewModel.weights.observe(viewLifecycleOwner,{
-//                            binding.weight.text.toString().toDouble()
-//                        })
-//
-//                        viewModel.heights.observe(viewLifecycleOwner,{
-//                            binding.height.text.toString().toDouble()
-//                        })
-//
-//                        viewModel.ages.observe(viewLifecycleOwner,{
-//                            binding.age.text.toString().toDouble()
-//                        })
 
                         var weights = binding.weight.text.toString().toDouble()
                         var heights = binding.height.text.toString().toInt()
                         var ages = binding.age.text.toString().toInt()
-//                        var amounts = viewModel.totalAmount
 
                         var chooseButton = binding.chooseButton.checkedRadioButtonId
-
-                        // var maleCalories = ((10*weights) + (6.25*heights) - (5*ages) + 5)
-
-                        // var femaleCalories = ((10*weights) + (6.25*heights) - (5*ages) - 161)
-
-                       // var total = viewModel.totalAmount
 
                         var total = when(chooseButton){
                             binding.male.id -> viewModel.maleCalories(weights, heights, ages)
@@ -93,27 +72,6 @@ class CalculatorFragment : Fragment() {
                 binding.weight.setError("Required")
                 binding.amount.setText(" ")
             }
-//            else{
-//                var weights = binding.weight.text.toString().toDouble()
-//                var heights = binding.height.text.toString().toDouble()
-//                var ages = binding.age.text.toString().toDouble()
-//
-//                var chooseButton = binding.chooseButton.checkedRadioButtonId
-//
-//                var maleCalories = ((10*weights) + (6.25*heights) - (5*ages) + 5)
-//
-//                var femaleCalories = ((10*weights) + (6.25*heights) - (5*ages) - 161)
-//
-//                var total = when(chooseButton){
-//                    binding.male.id -> maleCalories
-//                    else -> femaleCalories
-//                }
-//                binding.amount.setText("You need: $total Calories per day")
-//            }
-
-
-            //   binding.amount.setText("You need: $x Calories per day")
-
         }
 
     }

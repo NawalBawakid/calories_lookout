@@ -5,12 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.calories.calorieslookout.database.CaloriesData
 import com.calories.calorieslookout.databinding.FragmentBreakfastDescriptionBinding
 import com.calories.calorieslookout.viewModel.OverviewViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -42,10 +40,6 @@ class BreakfastDescriptionFragment : Fragment() {
         itemLables = viewModel.infoItem.value?.get(index)?.recipe?.label.toString()
 
         like = viewModel.isFav(userId, itemLables)
-        Log.e("TAG", "onCreate: $like")
-
-
-
 
     }
 
@@ -77,9 +71,7 @@ class BreakfastDescriptionFragment : Fragment() {
             mealViewModel = viewModel
             detailsBreakfastFragment = this@BreakfastDescriptionFragment
 
-
             if (favorite == 1) {
-//                viewModel.favorite(index, "" )
                 viewModel.informationll(index, 1)
             } else {
                 viewModel.informationll(index)
@@ -95,14 +87,7 @@ class BreakfastDescriptionFragment : Fragment() {
 
         binding.like.setOnClickListener {
 
-
-            // var favItem = viewModel.likeItem.value?.get(index)?.label
-            // Log.d("TAG", "onViewCreated: $favItem")
-
-            // viewModel.favItem(userId, itemLable)
-
            viewModel.favItem(userId, itemLables)
-
 
 
             isLike(like)
@@ -110,11 +95,9 @@ class BreakfastDescriptionFragment : Fragment() {
                 binding.like.setImageResource(R.drawable.ic_baseline_favorite_24)
                 binding.like.visibility = View.VISIBLE
 
-
             } else {
                 binding.like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 binding.like.visibility = View.VISIBLE
-                //viewModel.removeData(displyData)
              viewModel.unFavItem(userId, itemLables)
 
             }
@@ -125,7 +108,6 @@ class BreakfastDescriptionFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        //menu.clear()
         inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -133,7 +115,6 @@ class BreakfastDescriptionFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.breakfast -> {
-                Log.e("test", "onOptionsItemSelected: breakfast")
                 viewModel.getMealsPhotos("breakfast")
                 var action =
                     BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToBreakfastFragment2()
@@ -157,26 +138,16 @@ class BreakfastDescriptionFragment : Fragment() {
                 return true
             }
 
-//            R.id.calculation -> {
-//                val queryUrl: Uri = Uri.parse("https://apps.apple.com/sa/app/lifesum-healthy-eating/id286906691")
-//                val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-//                this?.startActivity(intent)
-//                return true
-//            }
-
             R.id.signout -> {
                 FirebaseAuth.getInstance().signOut()
                 var action =
                     BreakfastDescriptionFragmentDirections.actionBreakfastDescriptionFragment2ToLoginFragment()
                 findNavController().navigate(action)
 
-//                var action = BreakfastFragmentDirections.actionBreakfastFragmentToNavGraph2()
-//                findNavController(R.id.overviewFragment).navigate(action)
                 return true
             }
 
             else -> {
-                Log.e("test", "onOptionsItemSelected: else")
                 return super.onOptionsItemSelected(item)
             }
         }
@@ -194,6 +165,5 @@ class BreakfastDescriptionFragment : Fragment() {
 
         }
     }
-
 
 }

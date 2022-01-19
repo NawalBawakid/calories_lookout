@@ -1,21 +1,17 @@
 package com.calories.calorieslookout.adapter
 
 import android.util.Log
-import android.util.Log.i
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.startup.StartupLogger.i
 import com.bumptech.glide.Glide
 import com.calories.calorieslookout.R
 import com.calories.calorieslookout.database.CaloriesData
-
 import com.calories.calorieslookout.network.HitsItem
 import com.calories.calorieslookout.viewModel.CaloriesApiStatus
-import java.util.logging.Logger
 
 
 @BindingAdapter("textset")

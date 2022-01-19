@@ -8,12 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.calories.calorieslookout.LoginActivity
-import com.calories.calorieslookout.MainActivity
-import com.calories.calorieslookout.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -22,42 +17,6 @@ const val channelName = "notification_name"
 
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class NotificationService: FirebaseMessagingService() {
-
-//    val intent = Intent(this, LoginActivity::class.java).apply {
-//        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//    }
-//
-//    val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-//
-//    var builder = NotificationCompat.Builder(this, channelId)
-//        .setSmallIcon(R.drawable.calories_logo)
-//        .setContentTitle("MyCalories")
-//        .setContentText("test")
-//        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//        .setContentIntent(pendingIntent)
-//        .setAutoCancel(true)
-//
-//
-//    private fun createNotificationChannel() {
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = getString(R.string.channel_name)
-//            val descriptionText = getString(R.string.channel_description)
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(channelId, name, importance).apply {
-//                description = descriptionText
-//            }
-//            // Register the channel with the system
-//            val notificationManager: NotificationManager =
-//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//
-//        with(NotificationManagerCompat.from(this)) {
-//            // notificationId is a unique int for each notification that you must define
-//            notify(0, builder.build())
-//        }
-//    }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
