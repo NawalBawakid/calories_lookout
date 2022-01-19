@@ -20,11 +20,6 @@ import com.google.firebase.ktx.Firebase
 
 class FavoriteAdapter(val removeClickListener: (item:CaloriesData) -> Unit) : ListAdapter<CaloriesData, FavoriteAdapter.ResultsItemViewHolder>(DiffCallback) {
 
-    private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
-
-//    private val _likeItem = MutableLiveData<List<CaloriesData?>?>()
-//    var likeItem: LiveData<List<CaloriesData?>?> = _likeItem
-
     class ResultsItemViewHolder(private var binding: FavoriteItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(Item: CaloriesData) {
@@ -33,7 +28,6 @@ class FavoriteAdapter(val removeClickListener: (item:CaloriesData) -> Unit) : Li
         }
 
         var favoriteButton: ImageView = binding.like
-        var disLikeButton: ImageView = binding.disLike
         var image: ImageView = binding.posterImage
         var label: TextView = binding.title
         var calories: TextView = binding.caloriesnum
@@ -59,51 +53,18 @@ class FavoriteAdapter(val removeClickListener: (item:CaloriesData) -> Unit) : Li
 
       holder.bind(listMeal)
 
-//        holder.favoriteButton.setOnFocusChangeListener {buttonView , isFavorite ->
-//
-//            //CaloriesData[position].C = isChecked
-//
-//        }
-
         holder.favoriteButton.setOnClickListener{
 
-               // holder.favoriteButton.visibility = View.VISIBLE
-
             holder.favoriteButton.visibility = View.VISIBLE
-              //  holder.disLikeButton.visibility = View.GONE
 
             removeClickListener(listMeal)
             notifyItemRemoved(position)
-            // recreate(FavoriteFragment)
-
-
-           // getFragmentManager().beginTransaction().detach(this).attach(this).commit()
-
-
-//            val ft: FragmentTransaction = getFragmentManager().beginTransaction()
-//            if (Build.VERSION.SDK_INT >= 26) {
-//                ft.setReorderingAllowed(false)
-//            }
-//            ft.detach(this).attach(this).commit()
-
-
-          //  intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
-//            val intent = Intent(this@FavoriteAdapter, FavoriteAdapter::class.java)
-//            finish()
-//            startActivity(getIntent())
-
-
         }
 
         holder.itemOfMeal.setOnClickListener{
             var action = FavoriteFragmentDirections.actionFavoriteFragmentToBreakfastDescriptionFragment2(id = position, favorite = 1)
             holder.itemOfMeal.findNavController().navigate(action)
         }
-//        holder.itemOfMeal.setOnClickListener {
-//            var action = BreakfastFragmentDirections.actionBreakfastFragment2ToBreakfastDescriptionFragment2(id = position)
-//            holder.itemOfMeal.findNavController().navigate(action)
-//        }
     }
 
 }

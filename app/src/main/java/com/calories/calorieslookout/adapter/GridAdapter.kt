@@ -13,7 +13,6 @@ import com.calories.calorieslookout.network.HitsItem
 class GridAdapter :
     androidx.recyclerview.widget.ListAdapter<HitsItem, GridAdapter.ResultsItemViewHolder>(DiffCallback) {
 
-
     class ResultsItemViewHolder(private var binding: GridItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(Item : HitsItem ) {
@@ -22,7 +21,6 @@ class GridAdapter :
         }
         var itemOfMeal = binding.FoodItem
     }
-
 
 
     companion object DiffCallback : DiffUtil.ItemCallback<HitsItem>() {

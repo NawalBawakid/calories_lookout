@@ -1,35 +1,43 @@
 package com.calories.calorieslookout.viewModel
 
-import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.calories.calorieslookout.database.CaloriesData
+import com.calories.calorieslookout.database.ProfileImage
 import com.calories.calorieslookout.network.BreakfastApi
-import com.calories.calorieslookout.network.BreakfastApiService
 import com.calories.calorieslookout.network.HitsItem
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 import java.lang.Exception
-import java.lang.StringBuilder
-import java.util.logging.Logger
-import android.database.sqlite.SQLiteDatabase
-import android.text.TextUtils
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import kotlinx.coroutines.*
+import java.util.*
 
 
-enum class CaloriesApiStatus{LOADING, ERROR, DONE}
-class OverviewViewModel : ViewModel(){
+enum class CaloriesApiStatus { LOADING, ERROR, DONE }
+class OverviewViewModel : ViewModel() {
 
     private val _status = MutableLiveData<CaloriesApiStatus>()
-    val status: LiveData<CaloriesApiStatus> = _status
+    var status: LiveData<CaloriesApiStatus> = _status
 
     private val _infoItem = MutableLiveData<List<HitsItem?>?>()
     var infoItem: LiveData<List<HitsItem?>?> = _infoItem
 
-    private val _likeItem = MutableLiveData<List<CaloriesData?>?>()
-    var likeItem: LiveData<List<CaloriesData?>?> = _likeItem
+    private val _likeItem = MutableLiveData<MutableList<CaloriesData?>?>()
+    var likeItem: LiveData<MutableList<CaloriesData?>?> = _likeItem
+
+    private val _profileImage = MutableLiveData<String>()
+    var profileImage: LiveData<String> = _profileImage
+
+    private val _userImages = MutableLiveData<String>()
+    val userImages : LiveData<String> = _userImages
 
     private val _photos = MutableLiveData<String>()
     val photos: LiveData<String> = _photos
@@ -46,62 +54,43 @@ class OverviewViewModel : ViewModel(){
     private val _calories = MutableLiveData<String>()
     val calories: LiveData<String> = _calories
 
-    private var _weights = MutableLiveData<Double>()
-    val weights: LiveData<Double> = _weights
-
-        private val _heights = MutableLiveData<Int>()
-    val heights: LiveData<Int> = _heights
-
-    private val _ages = MutableLiveData<Int>()
-    val ages: LiveData<Int> = _ages
-
     private val _ingredient = MutableLiveData<String>()
     val ingredient: LiveData<String> = _ingredient
 
     private val CaloriesDataCollection = Firebase.firestore.collection("CaloriesData")
+    private val ImageCollection = Firebase.firestore.collection("posts")
 
     private val _caloriesNum = MutableLiveData<Double>()
     val caloriesNum: LiveData<Double> = _caloriesNum
 
-    var userNames =FirebaseAuth.getInstance().currentUser?.displayName
+    var userNames = FirebaseAuth.getInstance().currentUser?.displayName
 
-    var userEmail =FirebaseAuth.getInstance().currentUser?.email
-
-    var userImage =FirebaseAuth.getInstance().currentUser?.photoUrl
+    var userEmail = FirebaseAuth.getInstance().currentUser?.email
 
     private val _foodId = MutableLiveData<String>()
     val foodId: LiveData<String> = _foodId
 
-
-//    private val _isFavorite = MutableLiveData<Boolean>()
-//    val isFavorite: LiveData<Boolean> = _isFavorite
-
-
-//    private val apiService = BreakfastApiService()
-    private val mutableSearchTerm = MutableLiveData<String>()
-
-    val favoritList: MutableList<CaloriesData> = mutableListOf()
-
-
-
     init {
         getMealsPhotos("breakfast")
+        retriveData()
     }
 
 
-     fun getMealsPhotos(type: String) {
+    fun getMealsPhotos(type: String) {
         viewModelScope.launch {
             _status.value = CaloriesApiStatus.LOADING
             try {
-                Log.e("try", "${ _infoItem.value}")
-                when(type){
+                when (type) {
                     "breakfast" -> {
                         _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
-                        Log.e("br", "${ _infoItem.value}")
+                        Log.e("br", "${_infoItem.value}")
                     }
-                    "lunch" -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("lunch").hits
-                    "dinner" -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("dinner").hits
-                    else -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
+                    "lunch" -> _infoItem.value =
+                        BreakfastApi.retrofitService.getPhotos("lunch").hits
+                    "dinner" -> _infoItem.value =
+                        BreakfastApi.retrofitService.getPhotos("dinner").hits
+                    else -> _infoItem.value =
+                        BreakfastApi.retrofitService.getPhotos("breakfast").hits
                 }
                 _status.value = CaloriesApiStatus.DONE
             } catch (e: Exception) {
@@ -111,23 +100,51 @@ class OverviewViewModel : ViewModel(){
         }
     }
 
-    fun maleCalories(weights: Double, heights: Double, ages: Double): Double {
-
-
-       // _weights = weights
-
-       return ((10 * weights) + (6.25 * heights) - (5 * ages) + 5)
+    // Calories Calcolator for male
+    fun maleCalories(weights: Double, heights: Int, ages: Int): Double {
+        return ((10 * weights) + (6.25 * heights) - (5 * ages) + 5)
     }
 
-    fun femaleCalories(weights: Double, heights: Double, ages: Double): Double {
+    // Calories Calcolator for female
+    fun femaleCalories(weights: Double, heights: Int, ages: Int): Double {
         return ((10 * weights) + (6.25 * heights) - (5 * ages) - 161)
     }
 
-    fun informationll(index: Int , favorite : Int = 0) {
-        if (favorite == 1){
+    // retrive profile image from firestore
+    fun retriveImages() {
+        var userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        var img =  ImageCollection.document(userId).get()
+
+        img.addOnCompleteListener { task ->
+                _status.value = CaloriesApiStatus.LOADING
+                if (task.isSuccessful) {
+                    _profileImage.value = task.result!!.data?.get("imageUrl").toString()
+
+                } else {
+
+                }
+                _status.value = CaloriesApiStatus.DONE
+            }.addOnFailureListener {
+                println(it.message)
+            }
+    }
+
+    fun imagesScope(){
+        viewModelScope.launch {
+            try {
+                retriveImages()
+            }catch(e: Exception){
+
+            }
+        }
+    }
+
+
+    fun informationll(index: Int, favorite: Int = 0) {
+        if (favorite == 1) {
             favMealsList(index)
             retriveData()
-        }else{
+        } else {
             detailsMealsList(index)
             retriveData()
         }
@@ -135,15 +152,17 @@ class OverviewViewModel : ViewModel(){
     }
 
 
-    fun favMealsList(index: Int){
+    fun favMealsList(index: Int) {
         var item = _likeItem.value?.get(index)
+
         _photos.value = item?.image
         _title.value = item?.label
         _calories.value = item?.getCaloriesAsString()
         _ingredient.value = item?.ingredientLines.toString()
     }
 
-    fun detailsMealsList(index: Int){
+
+    fun detailsMealsList(index: Int) {
         var item = _infoItem.value?.get(index)
 
         _photos.value = item?.recipe?.image
@@ -151,6 +170,7 @@ class OverviewViewModel : ViewModel(){
         _descriptions.value = item?.recipe?.url
         _calories.value = item?.recipe?.getCaloriesAsString()
         _ingredient.value = item?.recipe?.ingredientLines.toString()
+
     }
 
 
@@ -158,9 +178,10 @@ class OverviewViewModel : ViewModel(){
         viewModelScope.launch {
             _status.value = CaloriesApiStatus.LOADING
             try {
-                when(query){
+                when (query) {
                     query -> _infoItem.value = BreakfastApi.retrofitService.getPhotos(query).hits
-                    else -> _infoItem.value = BreakfastApi.retrofitService.getPhotos("breakfast").hits
+                    else -> _infoItem.value =
+                        BreakfastApi.retrofitService.getPhotos("breakfast").hits
                 }
                 _status.value = CaloriesApiStatus.DONE
             } catch (e: Exception) {
@@ -171,75 +192,99 @@ class OverviewViewModel : ViewModel(){
     }
 
 
-    fun favorite(index: Int, userID: String) : CaloriesData{
-        var item = _infoItem.value?.get(index)
+    fun favItem(userId: String, itemLabel: String?) {
 
-        _photos.value = item?.recipe?.image
-        _title.value = item?.recipe?.label
-        _calories.value = item?.recipe?.getCaloriesAsString()
-        _foodId.value = item?.recipe?.source
+        val respi= _infoItem.value?.find { it!!.recipe!!.label == itemLabel }
+        respi?.let {
+            val caloriesData: CaloriesData = CaloriesData(it.recipe?.image, it.recipe?.label,it.recipe?.getCaloriesAsString()?.toDouble(), it.recipe?.source, userId, it.recipe?.ingredientLines)
 
-        return CaloriesData(item?.recipe?.image,item?.recipe?.label,item?.recipe?.getCalories(), item?.recipe?.source, userID, item?.recipe?.ingredientLines)
-    }
-
-
-    fun addtoFirebase(itemFavorate : CaloriesData){
-        var userId=FirebaseAuth.getInstance().currentUser?.uid?:""
-        CaloriesDataCollection.document("users").collection(userId).add(itemFavorate)
-            .addOnCompleteListener{task ->
-            if (task.isSuccessful){
-               // val document = task.result
-//                Toast.makeText(this.requireContext(), "Added to fov", Toast.LENGTH_SHORT).show()
-            }
+            addtoFirebase(caloriesData)
+            retriveData()
         }
     }
 
 
-    fun retriveData(){
-        var userId=FirebaseAuth.getInstance().currentUser?.uid?:""
-        CaloriesDataCollection.document("users").collection(userId).get().addOnCompleteListener{task ->
-            if (task.isSuccessful) {
-                val item = mutableListOf<CaloriesData>()
-                for (data in task.result!!.documents) {
-                    val calories = data.toObject<CaloriesData>()
-                    item.add(calories!!)
-                }
-                Log.d("TAG", "retriveData: $item")
-                _likeItem.value=item
-//                binding.favoriteItem = item
-            }else{
+    fun unFavItem(userId: String, itemLabel: String?) {
+        val respi= _infoItem.value?.find { it!!.recipe!!.label == itemLabel }
+        respi?.let {
 
-            }
-        }.addOnFailureListener {
-            println(it.message)
+            val caloriesData: CaloriesData = CaloriesData(it.recipe?.image, it.recipe?.label,it.recipe?.getCaloriesAsString()?.toDouble(), it.recipe?.source, userId, it.recipe?.ingredientLines)
+
+            removeData(caloriesData)
+            retriveData()
         }
     }
 
 
-    fun isFavorit(label: String):Boolean{
-       var isFave= _likeItem.value?.find { it?.label == label }
-        Log.d("TAG", "favoriteCheck: $isFave ")
+
+    fun isFav(userId: String, itemLabel: String?): Boolean {
+        viewModelScope.launch {
+           retriveData()
+        }
+
+        var isFave = _likeItem.value?.find {
+
+            if(  it?.label == itemLabel){
+                Log.e("TAG", "isFav:  $itemLabel :: ${it?.label}", )
+            }
+
+            it?.label == itemLabel
+        }
+
         isFave?.let {
-         return true
+            return true
         }
         return false
     }
 
 
-    fun removeData(itemFavorate : CaloriesData){
-        var userId=FirebaseAuth.getInstance().currentUser?.uid?:""
-        CaloriesDataCollection.document("users").collection(userId).whereEqualTo("image", itemFavorate.image)
+    // add favorit data to firestore
+    fun addtoFirebase(itemFavorate: CaloriesData) {
+        var userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        CaloriesDataCollection.document("users").collection(userId).add(itemFavorate)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                }
+            }
+    }
+
+    // retrive data from firestore
+    fun retriveData() {
+        var userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        CaloriesDataCollection.document("users").collection(userId).get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val item = mutableListOf<CaloriesData?>()
+                    for (data in task.result!!.documents) {
+                        val calories = data.toObject<CaloriesData>()
+                        item.add(calories!!)
+                    }
+                    _likeItem.value = item
+                } else {
+
+                }
+            }.addOnFailureListener {
+            println(it.message)
+        }
+    }
+
+    // remove favorite data from firestore
+    fun removeData(itemFavorate: CaloriesData) {
+        var userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        CaloriesDataCollection.document("users").collection(userId)
+            .whereEqualTo("image", itemFavorate.image)
             .whereEqualTo("label", itemFavorate.label)
             .whereEqualTo("calories", itemFavorate.calories)
             .get()
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful){
-                    if (task.result!!.documents.isNotEmpty()){
-                        for (data in task.result!!.documents){
-                            CaloriesDataCollection.document("users").collection(userId).document(data.id).delete()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    if (task.result!!.documents.isNotEmpty()) {
+                        for (data in task.result!!.documents) {
+                            CaloriesDataCollection.document("users").collection(userId)
+                                .document(data.id).delete()
                             retriveData()
                         }
-                    }else{
+                    } else {
 
                     }
                 }

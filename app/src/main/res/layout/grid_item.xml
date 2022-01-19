@@ -15,7 +15,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="2000dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20sp"
+        app:cardCornerRadius="10sp"
         app:cardUseCompatPadding="true">
 
 
@@ -24,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:cardCornerRadius="20sp"
-        android:background="#92E4E1E1">
+        style="@style/card">
 
         <ImageView
             android:id="@+id/poster_image"
@@ -42,7 +41,6 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:paddingTop="5dp"
@@ -50,7 +48,8 @@
             android:layout_marginEnd="20sp"
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/poster_image"
-            app:textset="@{item.recipe.label}" />
+            app:textset="@{item.recipe.label}"
+            style="@style/title"/>
 
         <TextView
             android:id="@+id/calories"
@@ -60,8 +59,9 @@
             android:paddingTop="5dp"
             android:paddingStart="10dp"
             android:textStyle="bold"
-            android:text="Calories: "
+            android:text="@string/calories"
             android:textSize="15sp"
+            style="@style/text"
             app:layout_constraintStart_toStartOf="@id/poster_image"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
@@ -77,31 +77,11 @@
             app:layout_constraintStart_toEndOf="@id/calories"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/disLike"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="40sp"-->
-<!--            app:srcCompat="@drawable/ic_baseline_favorite_border_24"-->
-<!--            android:visibility="visible"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/title"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/poster_image"/>-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/like"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="40sp"-->
-<!--            app:srcCompat="@drawable/ic_baseline_favorite_24"-->
-<!--            android:visibility="invisible"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/title"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/poster_image"/>-->
-
         <TextView
             android:id="@+id/noresult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Result"
+            android:text="@string/no_result"
             android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
@@ -116,9 +96,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -24,7 +24,7 @@ data class CaloriesData (
         val ingredientLines: List<String?>? = null,
 
         @Json(name="isFav")
-        val isFav:Boolean = false
+        val isFav:Boolean? = null
     ){
         fun getCaloriesAsString():String = calories?.roundToInt()?.toString()?:""
 }

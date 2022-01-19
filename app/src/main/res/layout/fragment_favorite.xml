@@ -13,6 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="10sp"
+        style="@style/background"
         tools:context="com.example.moviesapplication.overview.OverviewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -28,21 +30,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:favoriteData="@{OverViewModel.likeItem}"
         app:spanCount="1"
+        style="@style/background"
         tools:itemCount="16" />
-
-
-<!--        <ListView-->
-<!--            android:id="@+id/favoriteItems"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:clipToPadding="false"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:spanCount="1"-->
-<!--            tools:itemCount="16"/>-->
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

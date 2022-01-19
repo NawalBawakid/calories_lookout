@@ -2,15 +2,41 @@
     <!-- Base application theme. -->
     <style name="Theme.CaloriesLookout" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">#006064</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">#006064</item>
+        <item name="colorSecondaryVariant">#006064</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="background">
+        <item name="android:background">#090909</item>
+    </style>
+
+    <style name="card">
+        <item name="android:background">#2B2B2C</item>
+    </style>
+
+    <style name="button">
+        <item name="android:backgroundTint">#006064</item>
+        <item name="android:textColor">#FFFF</item>
+    </style>
+
+    <style name="text">
+        <item name="android:textColor">#FFFF</item>
+    </style>
+
+    <style name="title">
+        <item name="android:textColor">#FFFF</item>
+    </style>
+
+    <style name="loginText">
+        <item name="android:textColor">#D5D2D2</item>
+    </style>
+
 </resources>

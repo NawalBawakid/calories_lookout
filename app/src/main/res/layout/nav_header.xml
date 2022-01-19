@@ -10,7 +10,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/calorieslogo"/>
+        android:src="@drawable/calorieslogos"/>
 
     <TextView
         android:id="@+id/userName"
@@ -33,17 +33,5 @@
         android:layout_height="1dp"
         android:layout_marginTop="30dp"
         android:background="@color/underLine"/>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </LinearLayout>
