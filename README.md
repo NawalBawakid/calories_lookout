@@ -7,15 +7,16 @@
 
 
 # Features 
-* ##### Sign in with google 
-* ##### Provides a list of meals with menu to choose (Breakfast, Lunch, Dinner) 
-* ##### Provide a screen for the details of the meals including the calories and recipe
-* ##### Searching for specific meals
-* ##### Adding meals recipe to favorite screen 
-* ##### Provide a screen for calculating user Calories
-* ##### Saving user information in the profile screen 
-* ##### Dark & Light Mode 
-* ##### Sending notification to stimulate user continuation for managing their calories
+* ##### Registration with google.
+* ##### Display list of meals.
+* ##### Display meals description.
+* ##### Type of meals menu. 
+* ##### Search for specific meals.
+* ##### Adding meals recipe to favorite screen.
+* ##### Calories Calculator.
+* ##### User profile.
+* ##### Dark & Light Mode.
+* ##### Sending notification to stimulate user continuation for managing their calories.
 
 
 
@@ -28,14 +29,14 @@
 
 
 # unsolved problems
-* ##### Provide loading icon when uploading profile image
-* ##### Fixing dark mode switch button
+* ##### Provide loading icon when uploading profile image.
+* ##### Fixing dark mode switch button.
 
 
 
 # Favorite Functions
-> ##### Making a function to make sure if the item already in the favorite list will not add it again to it
-> ##### Making a function to search for item by name 
+> ##### Making a function to make sure if the item already in the favorite list will not add it again to it.
+> ##### Making a function to search for item by name.
 
 
 
