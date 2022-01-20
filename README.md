@@ -54,5 +54,14 @@
 
 # MyCalories UI
 
+![signin](https://user-images.githubusercontent.com/92260233/150340844-329bf758-3ccc-487d-b2af-c88ec932687c.png)
 
+![ProfilePage](https://user-images.githubusercontent.com/92260233/150340886-d6e6d6ce-b2f2-42e7-a924-d5cd43577b98.png)
 
+![HomePage](https://user-images.githubusercontent.com/92260233/150340921-8f59ab3e-7e3e-4d7c-b1f0-b4ec764a3b82.png)
+
+![DetailsPage](https://user-images.githubusercontent.com/92260233/150340992-458dad3c-c066-4ce9-9027-4780baaa9e54.png)
+
+![FavoratePage](https://user-images.githubusercontent.com/92260233/150341035-40868894-4004-4272-ade6-065af41b2bb0.png)
+
+![CalculatorPage](https://user-images.githubusercontent.com/92260233/150341204-0871ac43-a07a-43ee-bf57-e7dfca553822.png)
