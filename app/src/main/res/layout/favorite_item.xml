@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.calories.calorieslookout.database.CaloriesData" />
+
+        <variable
+            name="mealViewModel"
+            type="com.calories.calorieslookout.viewModel.OverviewViewModel"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10sp"
+        style="@style/card">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favoriteItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/poster_image"
+            android:layout_width="170dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{item.image}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="150dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="9dp"
+            app:layout_constraintStart_toEndOf="@id/poster_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textset="@{item.label}"
+            style="@style/title"/>
+
+        <TextView
+            android:id="@+id/caloriesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10sp"
+            android:textStyle="bold"
+            android:text="@string/calories"
+            android:textSize="15sp"
+            style="@style/text"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/caloriesnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@{String.valueOf(item.getCaloriesAsString)}"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/caloriesTitle"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/like"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginTop="10sp"
+            app:srcCompat="@drawable/ic_baseline_favorite_24"
+            android:visibility="visible"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/likebtn"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.calories.calorieslookout.network.HitsItem" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="2000dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10sp"
+        app:cardUseCompatPadding="true">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/FoodItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        style="@style/card">
+
+        <ImageView
+            android:id="@+id/poster_image"
+            android:layout_width="400dp"
+            android:layout_height="170dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{item.recipe.image}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:layout_marginEnd="20sp"
+            app:layout_constraintStart_toStartOf="@id/poster_image"
+            app:layout_constraintTop_toBottomOf="@id/poster_image"
+            app:textset="@{item.recipe.label}"
+            style="@style/title"/>
+
+        <TextView
+            android:id="@+id/calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:textStyle="bold"
+            android:text="@string/calories"
+            android:textSize="15sp"
+            style="@style/text"
+            app:layout_constraintStart_toStartOf="@id/poster_image"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/caloriesnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="@{String.valueOf(item.recipe.getCaloriesAsString)}"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/calories"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/noresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_result"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".movie.DetailsFragment">
+
+    <data>
+        <variable
+            name="mealViewModel"
+            type="com.calories.calorieslookout.viewModel.OverviewViewModel" />
+
+        <variable
+            name="profileFragment"
+            type="com.calories.calorieslookout.ProfileFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        style="@style/background">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card1"
+                android:layout_width="370dp"
+                android:layout_height="190dp"
+                android:layout_marginTop="60dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/card">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_marginStart="30sp"
+                        android:layout_marginTop="40sp"
+                        imageUrl="@{mealViewModel.profileImage.toString()}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/status_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/editImage"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:calorieApiStatus="@{mealViewModel.status}" />
+
+                    <TextView
+                        android:id="@+id/selectImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:textSize="15sp"
+                        android:textStyle="italic"
+                        android:text="@string/select"
+                        app:layout_constraintStart_toStartOf="@id/profileImage"
+                        app:layout_constraintTop_toBottomOf="@id/profileImage" />
+
+                    <TextView
+                        android:id="@+id/editImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10sp"
+                        android:textSize="15sp"
+                        android:textStyle="italic"
+                        android:text="@string/upload"
+                        app:layout_constraintStart_toEndOf="@id/selectImage"
+                        app:layout_constraintTop_toBottomOf="@id/profileImage"
+                        app:layout_constraintEnd_toEndOf="@id/profileImage"/>
+
+                    <TextView
+                        android:id="@+id/usersName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="65sp"
+                        android:text="@{mealViewModel.userNames}"
+                        style="@style/title"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/profileImage"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/usersEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="15sp"
+                        android:text="@{mealViewModel.userEmail}"
+                        style="@style/title"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/profileImage"
+                        app:layout_constraintTop_toBottomOf="@id/usersName" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card2"
+                android:layout_width="370dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:ignore="NotSibling"
+                    style="@style/card">
+
+                    <ImageView
+                        android:id="@+id/moon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:paddingTop="30dp"
+                        android:src="@drawable/ic_baseline_nights_stay_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/card1"/>
+
+                    <TextView
+                        android:id="@+id/dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dark_mode"
+                        android:paddingTop="30dp"
+                        android:textSize="19sp"
+                        android:layout_marginStart="10sp"
+                        style="@style/title"
+                        app:layout_constraintStart_toEndOf="@id/moon"
+                        app:layout_constraintTop_toBottomOf="@id/card1"/>
+
+                    <Switch
+                        android:id="@+id/switchBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="30dp"
+                        app:layout_constraintStart_toEndOf="@id/dark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/card1"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
